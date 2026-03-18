@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://crivg37iaxi26"]
+
+[ext_resource type="SpriteFrames" uid="uid://brqumy5qx2ufx" path="res://Player/PlayerSpriteFrames.tres" id="1_sxu62"]
+
+[node name="Player" type="CharacterBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = ExtResource("1_sxu62")
+animation = &"Attack"
