@@ -6,6 +6,7 @@ class_name PlatformerController2D extends CharacterBody2D
 @export var CooldownTimer: Timer
 @export var OverflowTimer: Timer
 @export var HitboxSpawn: Node2D
+@export var DashCast: RayCast2D
 
 @export_category("Attacks")
 @export var slashHitbox: Shape2D
@@ -28,6 +29,7 @@ class_name PlatformerController2D extends CharacterBody2D
 var rage: int = 0
 var jumps: int = 0
 var dashes: int = 0
+var dashPositionX: int
 var speedMultiplier: int = 30
 var jumpMultiplier: int = -30
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -36,6 +38,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 enum State {IDLE, WALK, JUMP, FALL, DASH, ATTACK, OVERFLOW, DEAD}
 var currentState = State.IDLE
 
+#Allowances
 var canMove: bool = true
 var canJump: bool = true
 var canAttack: bool = true
@@ -52,7 +55,7 @@ func _physics_process(delta):
 		if (currentState != State.ATTACK):
 			canAttack = CooldownTimer.is_stopped()
 			canJump = is_on_floor() or jumps < maxJumps
-			canDash = PlayerSprite.animation != "Dash"
+			canDash = dashes < maxDashes
 		else:
 			canAttack = false
 			canJump = false
@@ -80,13 +83,25 @@ func _physics_process(delta):
 	if (direction and canMove):
 		currentState = State.WALK
 		velocity.x = direction * speed * speedMultiplier
-	else:
+	elif (currentState != State.DASH):
 		currentState = State.IDLE
 		velocity.x = move_toward(velocity.x, 0, speed * speedMultiplier * friction)
+	else:
+		global_position.x = move_toward(global_position.x, dashPositionX, 5)
 	
 	#Dash
 	if (Input.is_action_just_pressed("dash") and canDash):
-		pass
+		#Animation + Colliders + Increment
+		PlayerSprite.play("Dash")
+		PlayerCollider.disabled = true
+		velocity.x = 0
+		dashes += 1
+		
+		#Dash Point Calculation
+		if DashCast.is_colliding():
+			dashPositionX = DashCast.get_collision_point().x-DashCast.target_position.x/8
+		else:
+			dashPositionX = global_position.x + DashCast.target_position.x*7/8
 	
 	#Attack
 	if (Input.is_action_just_pressed("attack") and canAttack):
@@ -166,9 +181,11 @@ func _check_flip() -> void:
 	if velocity.x > 0.1: #Facing Right
 		PlayerSprite.flip_h = false
 		HitboxSpawn.position.x = 8
+		DashCast.target_position.x = 128
 	elif velocity.x < -0.1: # Facing Left
 		PlayerSprite.flip_h = true
 		HitboxSpawn.position.x = -8
+		DashCast.target_position.x = -128
 
 func _on_player_sprite_animation_finished():
 	match PlayerSprite.animation:
@@ -176,6 +193,7 @@ func _on_player_sprite_animation_finished():
 			PlayerSprite.play("Idle")
 			currentState = State.IDLE
 		"Dash":
+			PlayerCollider.disabled = false
 			PlayerSprite.play("Idle")
 			currentState = State.IDLE
 

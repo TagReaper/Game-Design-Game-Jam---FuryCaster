@@ -9,22 +9,23 @@
 radius = 9.0
 height = 26.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("PlayerSprite", "PlayerCollider", "CooldownTimer", "OverflowTimer", "HitboxSpawn")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("PlayerSprite", "PlayerCollider", "CooldownTimer", "OverflowTimer", "HitboxSpawn", "DashCast")]
 script = ExtResource("1_exxqv")
 PlayerSprite = NodePath("PlayerSprite")
 PlayerCollider = NodePath("PlayerCollision")
 CooldownTimer = NodePath("Cooldown")
 OverflowTimer = NodePath("Overflow")
 HitboxSpawn = NodePath("Hitbox Spawn")
+DashCast = NodePath("DashCast")
 slashHitbox = SubResource("CapsuleShape2D_fyjlv")
+speed = 6.0
 friction = 0.8
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = ExtResource("1_sxu62")
-animation = &"Attack"
+animation = &"Dash"
 autoplay = "Idle"
-frame = 2
 
 [node name="PlayerCollision" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3)
@@ -38,6 +39,10 @@ one_shot = true
 
 [node name="Hitbox Spawn" type="Node2D" parent="."]
 position = Vector2(8, 0)
+
+[node name="DashCast" type="RayCast2D" parent="."]
+target_position = Vector2(144, 0)
+collision_mask = 2
 
 [connection signal="animation_finished" from="PlayerSprite" to="." method="_on_player_sprite_animation_finished"]
 [connection signal="timeout" from="Overflow" to="." method="_on_overflow_timeout"]

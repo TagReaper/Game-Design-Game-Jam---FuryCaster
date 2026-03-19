@@ -26,8 +26,9 @@ mesh = SubResource("BoxMesh_2q02k")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -72)
-zoom = Vector2(5, 5)
+zoom = Vector2(4, 4)
 
 [node name="Player" parent="." instance=ExtResource("1_80dxn")]
-position = Vector2(1, -57)
+position = Vector2(-113, -57)
 collision_mask = 2
+speed = 6.0

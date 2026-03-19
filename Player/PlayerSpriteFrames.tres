@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=31 format=3 uid="uid://brqumy5qx2ufx"]
+[gd_resource type="SpriteFrames" load_steps=34 format=3 uid="uid://brqumy5qx2ufx"]
 
 [ext_resource type="Texture2D" uid="uid://depuwwdpr42u4" path="res://Player/Player Spritesheet.png" id="1_cojbp"]
 
@@ -13,6 +13,18 @@ region = Rect2(128, 256, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_igigi"]
 atlas = ExtResource("1_cojbp")
 region = Rect2(160, 256, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rxnql"]
+atlas = ExtResource("1_cojbp")
+region = Rect2(0, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vial0"]
+atlas = ExtResource("1_cojbp")
+region = Rect2(32, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5amkn"]
+atlas = ExtResource("1_cojbp")
+region = Rect2(64, 192, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fi03i"]
 atlas = ExtResource("1_cojbp")
@@ -133,6 +145,32 @@ animations = [{
 "loop": false,
 "name": &"Attack",
 "speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rxnql")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vial0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5amkn")
+}, {
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5amkn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vial0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rxnql")
+}],
+"loop": false,
+"name": &"Dash",
+"speed": 16.0
 }, {
 "frames": [{
 "duration": 1.0,
