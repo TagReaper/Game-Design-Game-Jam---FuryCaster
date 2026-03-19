@@ -1,10 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://crivg37iaxi26"]
+[gd_scene load_steps=4 format=3 uid="uid://crivg37iaxi26"]
 
+[ext_resource type="Script" path="res://Player/Player.gd" id="1_exxqv"]
 [ext_resource type="SpriteFrames" uid="uid://brqumy5qx2ufx" path="res://Player/PlayerSpriteFrames.tres" id="1_sxu62"]
 
-[node name="Player" type="CharacterBody2D"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ehols"]
+radius = 9.0
+height = 26.0
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_exxqv")
+
+[node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = ExtResource("1_sxu62")
-animation = &"Attack"
+animation = &"Idle"
+autoplay = "Idle"
+frame_progress = 0.182644
+
+[node name="PlayerCollision" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+shape = SubResource("CapsuleShape2D_ehols")
