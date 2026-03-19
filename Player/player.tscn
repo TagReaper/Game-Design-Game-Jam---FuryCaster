@@ -24,8 +24,10 @@ friction = 0.8
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = ExtResource("1_sxu62")
-animation = &"Dash"
+animation = &"Overflow"
 autoplay = "Idle"
+frame = 2
+frame_progress = 1.0
 
 [node name="PlayerCollision" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3)
