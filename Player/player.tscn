@@ -27,3 +27,8 @@ shape = SubResource("CapsuleShape2D_ehols")
 [node name="Cooldown" type="Timer" parent="."]
 wait_time = 0.3
 one_shot = true
+
+[node name="Overflow" type="Timer" parent="."]
+
+[connection signal="animation_finished" from="PlayerSprite" to="." method="_on_player_sprite_animation_finished"]
+[connection signal="timeout" from="Overflow" to="." method="_on_overflow_timeout"]

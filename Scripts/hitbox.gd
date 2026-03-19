@@ -4,13 +4,15 @@ var damage: int
 var lifetime: float
 var shape: Shape2D
 var hostile: bool
+var rage: int
 #note: Hitbox logging
 
-func _init(_damage: int, _lifetime: float, _shape: Shape2D, _hostile: bool) -> void:
+func _init(_damage: int, _rage: int, _lifetime: float, _shape: Shape2D, _hostile: bool) -> void:
 	damage = _damage
 	lifetime = _lifetime
 	shape = _shape
 	hostile = _hostile
+	rage = _rage
 
 func _ready() -> void:
 	monitorable = false
@@ -38,4 +40,4 @@ func _ready() -> void:
 func _on_area_entered(area: Area2D) -> void:
 	if not area.has_method("_recieve_hit"):
 		return
-	area._recieve_hit(damage)
+	area._recieve_hit(damage, rage)
