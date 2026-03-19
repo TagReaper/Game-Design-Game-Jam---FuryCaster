@@ -31,4 +31,3 @@ zoom = Vector2(4, 4)
 [node name="Player" parent="." instance=ExtResource("1_80dxn")]
 position = Vector2(-113, -57)
 collision_mask = 2
-speed = 6.0

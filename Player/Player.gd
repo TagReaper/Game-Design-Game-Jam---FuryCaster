@@ -2,7 +2,7 @@ class_name PlatformerController2D extends CharacterBody2D
 
 @export_category("Reference Nodes")
 @export var PlayerSprite: AnimatedSprite2D
-@export var PlayerCollider: CollisionShape2D
+@export var PlayerCollider: CollisionShape2D #Change to Hurtbox Soon
 @export var CooldownTimer: Timer
 @export var OverflowTimer: Timer
 @export var HitboxSpawn: Node2D
