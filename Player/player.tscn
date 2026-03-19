@@ -7,16 +7,23 @@
 radius = 9.0
 height = 26.0
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("PlayerSprite", "PlayerCollider", "CooldownTimer")]
 script = ExtResource("1_exxqv")
+PlayerSprite = NodePath("PlayerSprite")
+PlayerCollider = NodePath("PlayerCollision")
+CooldownTimer = NodePath("Cooldown")
+friction = 0.8
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = ExtResource("1_sxu62")
 animation = &"Idle"
 autoplay = "Idle"
-frame_progress = 0.182644
 
 [node name="PlayerCollision" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3)
 shape = SubResource("CapsuleShape2D_ehols")
+
+[node name="Cooldown" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true

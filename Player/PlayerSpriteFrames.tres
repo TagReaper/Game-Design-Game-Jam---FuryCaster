@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=32 format=3 uid="uid://brqumy5qx2ufx"]
+[gd_resource type="SpriteFrames" load_steps=31 format=3 uid="uid://brqumy5qx2ufx"]
 
 [ext_resource type="Texture2D" uid="uid://depuwwdpr42u4" path="res://Player/Player Spritesheet.png" id="1_cojbp"]
 
@@ -41,10 +41,6 @@ region = Rect2(160, 224, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_pmqly"]
 atlas = ExtResource("1_cojbp")
 region = Rect2(192, 224, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cdurr"]
-atlas = ExtResource("1_cojbp")
-region = Rect2(128, 160, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ten7l"]
 atlas = ExtResource("1_cojbp")
@@ -165,9 +161,6 @@ animations = [{
 "speed": 6.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cdurr")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ten7l")
 }, {
