@@ -5,6 +5,11 @@ class_name PlatformerController2D extends CharacterBody2D
 @export var PlayerCollider: CollisionShape2D
 @export var CooldownTimer: Timer
 @export var OverflowTimer: Timer
+@export var HitboxSpawn: Node2D
+
+@export_category("Attacks")
+@export var slashHitbox: Shape2D
+@export var slashDamage: int = 1
 
 @export_category("Movement Stats")
 @export var speed: float = 10
@@ -85,8 +90,14 @@ func _physics_process(delta):
 	
 	#Attack
 	if (Input.is_action_just_pressed("attack") and canAttack):
+		#Animation + Cooldown
 		PlayerSprite.play("Attack")
 		CooldownTimer.start()
+		
+		#Hitbox Generation
+		var hitbox = Hitbox.new(slashDamage, 0, 0.25, slashHitbox, false)
+		HitboxSpawn.add_child(hitbox)
+		
 	
 	#Cast Spell
 	if (Input.is_action_just_pressed("castSpell") and canAttack):
@@ -115,13 +126,16 @@ func _physics_process(delta):
 		"Death":
 			currentState = State.DEAD
 	
+	#flips the character
+	_check_flip()
+	
 	#Animation State
-	_check_Animation()
+	_check_animation()
 	
 	#Moving
 	move_and_slide()
 
-func _check_Animation() -> void:
+func _check_animation() -> void:
 	match currentState:
 		State.IDLE:
 			if PlayerSprite.animation != "Idle":
@@ -147,6 +161,14 @@ func _check_Animation() -> void:
 		State.DEAD:
 			if PlayerSprite.animation != "Death":
 				PlayerSprite.play("Death")
+
+func _check_flip() -> void:
+	if velocity.x > 0.1: #Facing Right
+		PlayerSprite.flip_h = false
+		HitboxSpawn.position.x = 8
+	elif velocity.x < -0.1: # Facing Left
+		PlayerSprite.flip_h = true
+		HitboxSpawn.position.x = -8
 
 func _on_player_sprite_animation_finished():
 	match PlayerSprite.animation:
