@@ -2,7 +2,7 @@ class_name Hurtbox extends Area2D
 
 @onready var owner_health: int = owner.health
 @onready var owner_rage: int = owner.rage
-@onready var owner_hostile: bool = owner.hostile
+@export var owner_hostile: bool
 
 func _ready():
 	monitoring = false
@@ -11,9 +11,9 @@ func _ready():
 	set_collision_mask_value(1, false)
 	
 	if (owner_hostile):
-		set_collision_layer_value(5, true)
-	else:
 		set_collision_layer_value(4, true)
+	else:
+		set_collision_layer_value(5, true)
 
 func _recieve_hit(_damage: int, _rage: int):
 	owner_health -= _damage

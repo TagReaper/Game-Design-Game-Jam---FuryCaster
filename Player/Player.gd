@@ -112,7 +112,6 @@ func _physics_process(delta):
 		#Hitbox Generation
 		var hitbox = Hitbox.new(slashDamage, 0, 0.25, slashHitbox, false)
 		HitboxSpawn.add_child(hitbox)
-		
 	
 	#Cast Spell
 	if (Input.is_action_just_pressed("castSpell") and canAttack):
