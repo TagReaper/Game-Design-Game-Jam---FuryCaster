@@ -63,6 +63,3 @@ slashDamage = 3
 [node name="Slime" parent="." instance=ExtResource("1_wxnq6")]
 position = Vector2(144, -45)
 rightLimitX = 144
-
-[node name="Slime2" parent="." instance=ExtResource("1_wxnq6")]
-position = Vector2(212, -80)

@@ -41,7 +41,7 @@ scale = Vector2(1, 0.959255)
 mesh = SubResource("BoxMesh_2q02k")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="Ground/StaticBody2D"]
-position = Vector2(-139.8, -0.35)
+position = Vector2(-147, -0.05)
 collision_layer = 2
 collision_mask = 0
 
@@ -58,11 +58,7 @@ zoom = Vector2(2, 2)
 
 [node name="Player" parent="." instance=ExtResource("1_80dxn")]
 position = Vector2(-124, -121)
-slashDamage = 3
 
 [node name="Slime" parent="." instance=ExtResource("1_wxnq6")]
 position = Vector2(144, -45)
 rightLimitX = 144
-
-[node name="Slime2" parent="." instance=ExtResource("1_wxnq6")]
-position = Vector2(212, -80)

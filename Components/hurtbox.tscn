@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://d0fb8cd3qt8qx"]
+
+[ext_resource type="Script" path="res://Components/hurtbox.gd" id="1_dyvwq"]
+[ext_resource type="AudioStream" uid="uid://c3xu7rax4ldw2" path="res://Audio/SFX/hitHurt.mp3" id="2_v8y3v"]
+
+[node name="Hurtbox" type="Area2D" node_paths=PackedStringArray("SFX")]
+script = ExtResource("1_dyvwq")
+SFX = NodePath("SFX")
+
+[node name="SFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_v8y3v")
+volume_db = -8.0

@@ -1,15 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://crivg37iaxi26"]
+[gd_scene load_steps=8 format=3 uid="uid://crivg37iaxi26"]
 
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_exxqv"]
 [ext_resource type="SpriteFrames" uid="uid://brqumy5qx2ufx" path="res://Player/PlayerSpriteFrames.tres" id="1_sxu62"]
+[ext_resource type="AudioStream" uid="uid://df1n18sspvqk1" path="res://Audio/SFX/Player Slash.mp3" id="3_gn030"]
+[ext_resource type="PackedScene" uid="uid://d0fb8cd3qt8qx" path="res://Components/hurtbox.tscn" id="4_4ypy4"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fyjlv"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ehols"]
 radius = 9.0
+height = 28.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yrima"]
+radius = 7.0
 height = 26.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("PlayerSprite", "PlayerCollider", "CooldownTimer", "OverflowTimer", "HitboxSpawn", "DashCast")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("PlayerSprite", "PlayerCollider", "CooldownTimer", "OverflowTimer", "HitboxSpawn", "DashCast", "SFX", "hurtbox") groups=["Player"]]
+collision_mask = 2
 script = ExtResource("1_exxqv")
 PlayerSprite = NodePath("PlayerSprite")
 PlayerCollider = NodePath("PlayerCollision")
@@ -17,6 +24,8 @@ CooldownTimer = NodePath("Cooldown")
 OverflowTimer = NodePath("Overflow")
 HitboxSpawn = NodePath("Hitbox Spawn")
 DashCast = NodePath("DashCast")
+SFX = NodePath("SFX")
+hurtbox = NodePath("Hurtbox")
 slashHitbox = SubResource("CapsuleShape2D_fyjlv")
 speed = 6.0
 friction = 0.8
@@ -24,13 +33,12 @@ friction = 0.8
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = ExtResource("1_sxu62")
-animation = &"Overflow"
+animation = &"Idle"
 autoplay = "Idle"
-frame = 2
-frame_progress = 1.0
+frame_progress = 0.603212
 
 [node name="PlayerCollision" type="CollisionShape2D" parent="."]
-position = Vector2(0, 3)
+position = Vector2(0, 2)
 shape = SubResource("CapsuleShape2D_ehols")
 
 [node name="Cooldown" type="Timer" parent="."]
@@ -38,13 +46,25 @@ wait_time = 0.3
 one_shot = true
 
 [node name="Overflow" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
 
 [node name="Hitbox Spawn" type="Node2D" parent="."]
 position = Vector2(8, 0)
 
 [node name="DashCast" type="RayCast2D" parent="."]
+position = Vector2(0, 11)
 target_position = Vector2(144, 0)
 collision_mask = 2
+
+[node name="SFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_gn030")
+
+[node name="Hurtbox" parent="." instance=ExtResource("4_4ypy4")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, 3)
+shape = SubResource("CapsuleShape2D_yrima")
 
 [connection signal="animation_finished" from="PlayerSprite" to="." method="_on_player_sprite_animation_finished"]
 [connection signal="timeout" from="Overflow" to="." method="_on_overflow_timeout"]

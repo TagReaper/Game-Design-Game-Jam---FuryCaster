@@ -7,6 +7,8 @@ class_name PlatformerController2D extends CharacterBody2D
 @export var OverflowTimer: Timer
 @export var HitboxSpawn: Node2D
 @export var DashCast: RayCast2D
+@export var SFX: AudioStreamPlayer2D
+@export var hurtbox: Hurtbox
 
 @export_category("Attacks")
 @export var slashHitbox: Shape2D
@@ -25,13 +27,14 @@ class_name PlatformerController2D extends CharacterBody2D
 @export var maxRage: int = 100
 
 #Intenal Variables
-@onready var health: int = maxHealth
+var health: int = maxHealth
 var rage: int = 0
 var jumps: int = 0
 var dashes: int = 0
 var dashPositionX: int
 var speedMultiplier: int = 30
 var jumpMultiplier: int = -30
+var deathSFX = preload("res://Audio/SFX/Player Death SFX.mp3")
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
  
 #State Handler
@@ -107,12 +110,13 @@ func _physics_process(delta):
 	if (Input.is_action_just_pressed("attack") and canAttack):
 		#Animation + Cooldown
 		PlayerSprite.play("Attack")
+		SFX.pitch_scale = randf_range(0.9, 1.1)
+		SFX.play()
 		CooldownTimer.start()
 		
 		#Hitbox Generation
 		var hitbox = Hitbox.new(slashDamage, 0, 0.25, slashHitbox, false)
 		HitboxSpawn.add_child(hitbox)
-		
 	
 	#Cast Spell
 	if (Input.is_action_just_pressed("castSpell") and canAttack):
@@ -121,6 +125,7 @@ func _physics_process(delta):
 	#Overflow Check
 	if (rage > maxRage):
 		currentState = State.OVERFLOW
+		health *= 0.75
 	else:
 		#Extra State Checks in order of priority
 		if (!is_on_floor() and canMove):
@@ -131,6 +136,8 @@ func _physics_process(delta):
 	
 	if (health <= 0):
 		if PlayerSprite.animation != "Death":
+			SFX.stream = deathSFX
+			SFX.play()
 			PlayerSprite.play("Death")
 	
 	match PlayerSprite.animation:
@@ -199,5 +206,6 @@ func _on_player_sprite_animation_finished():
 
 func _on_overflow_timeout():
 	if currentState != State.DEAD:
+		rage = maxRage / 3
 		PlayerSprite.play("Idle")
 		currentState = State.IDLE
