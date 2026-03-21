@@ -59,6 +59,7 @@ collision_mask = 2
 
 [node name="SFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_gn030")
+volume_db = 1.0
 
 [node name="Hurtbox" parent="." instance=ExtResource("4_4ypy4")]
 

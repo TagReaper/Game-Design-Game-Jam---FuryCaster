@@ -40,6 +40,7 @@ var moveTo: int
 var deathSFX= preload("res://Audio/SFX/Enemy Death SFX.mp3")
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var player_pos: Vector2
+@onready var volumeMax: float = SFX.volume_db
 
 #State Handler
 enum State {ROAM, CHASE, SEARCH, ATTACK, DEAD}
@@ -60,7 +61,7 @@ func _physics_process(delta):
 			EnemyCollision.disabled = true
 			EnemySprite.play("Death")
 			SFX.stream = deathSFX
-			SFX.volume_db = -15
+			SFX.volume_db = -50 + Global.SFX_Volume * (-15+80)
 			SFX.play()
 			await get_tree().create_timer(2).timeout 
 			queue_free()
@@ -130,6 +131,7 @@ func _attack() -> void:
 			if EnemySprite.animation != substate and CooldownTimer.is_stopped():
 				EnemySprite.play(substate)
 				SFX.pitch_scale = randf_range(0.9, 1.1)
+				SFX.volume_db = -50 + Global.SFX_Volume * (volumeMax+80)
 				SFX.play()
 				
 				#Hitbox Generation

@@ -36,6 +36,7 @@ var speedMultiplier: int = 30
 var jumpMultiplier: int = -30
 var deathSFX = preload("res://Audio/SFX/Player Death SFX.mp3")
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+@onready var volumeMax: float = SFX.volume_db
  
 #State Handler
 enum State {IDLE, WALK, JUMP, FALL, DASH, ATTACK, OVERFLOW, DEAD}
@@ -111,6 +112,7 @@ func _physics_process(delta):
 		#Animation + Cooldown
 		PlayerSprite.play("Attack")
 		SFX.pitch_scale = randf_range(0.9, 1.1)
+		SFX.volume_db = -50 + Global.SFX_Volume * (volumeMax+80)
 		SFX.play()
 		CooldownTimer.start()
 		
@@ -137,6 +139,7 @@ func _physics_process(delta):
 	if (health <= 0):
 		if PlayerSprite.animation != "Death":
 			SFX.stream = deathSFX
+			SFX.volume_db = -50 + Global.SFX_Volume * (volumeMax+80)
 			SFX.play()
 			PlayerSprite.play("Death")
 	

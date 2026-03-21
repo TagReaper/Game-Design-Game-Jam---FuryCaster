@@ -82,7 +82,7 @@ position = Vector2(0, -5)
 
 [node name="SFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_kicqg")
-volume_db = -5.0
+volume_db = -8.0
 
 [node name="Hurtbox" parent="." instance=ExtResource("4_ucekr")]
 owner_hostile = true
