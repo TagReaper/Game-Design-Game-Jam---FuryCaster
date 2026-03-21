@@ -35,6 +35,8 @@ var dashPositionX: int
 var speedMultiplier: int = 30
 var jumpMultiplier: int = -30
 var deathSFX = preload("res://Audio/SFX/Player Death SFX.mp3")
+var attackSFX = preload("res://Audio/SFX/Player Slash.mp3")
+var dashSFX = preload("res://Audio/SFX/Dash.mp3")
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var volumeMax: float = SFX.volume_db
  
@@ -98,6 +100,10 @@ func _physics_process(delta):
 		#Animation + Colliders + Increment
 		PlayerSprite.play("Dash")
 		PlayerCollider.disabled = true
+		SFX.stream = dashSFX
+		SFX.pitch_scale = randf_range(0.95, 1.05)
+		SFX.volume_db = -50 + Global.SFX_Volume * (-8+50)
+		SFX.play()
 		velocity.x = 0
 		dashes += 1
 		
@@ -106,13 +112,16 @@ func _physics_process(delta):
 			dashPositionX = DashCast.get_collision_point().x-DashCast.target_position.x/8
 		else:
 			dashPositionX = global_position.x + DashCast.target_position.x*7/8
+		
+		hurtbox.monitorable = false
 	
 	#Attack
 	if (Input.is_action_just_pressed("attack") and canAttack):
 		#Animation + Cooldown
 		PlayerSprite.play("Attack")
+		SFX.stream = attackSFX
 		SFX.pitch_scale = randf_range(0.9, 1.1)
-		SFX.volume_db = -50 + Global.SFX_Volume * (volumeMax+80)
+		SFX.volume_db = -50 + Global.SFX_Volume * (1+50)
 		SFX.play()
 		CooldownTimer.start()
 		
@@ -139,7 +148,7 @@ func _physics_process(delta):
 	if (health <= 0):
 		if PlayerSprite.animation != "Death":
 			SFX.stream = deathSFX
-			SFX.volume_db = -50 + Global.SFX_Volume * (volumeMax+80)
+			SFX.volume_db = -50 + Global.SFX_Volume * (-10+50)
 			SFX.play()
 			PlayerSprite.play("Death")
 	
@@ -203,6 +212,7 @@ func _on_player_sprite_animation_finished():
 			PlayerSprite.play("Idle")
 			currentState = State.IDLE
 		"Dash":
+			hurtbox.monitorable = true
 			PlayerCollider.disabled = false
 			PlayerSprite.play("Idle")
 			currentState = State.IDLE

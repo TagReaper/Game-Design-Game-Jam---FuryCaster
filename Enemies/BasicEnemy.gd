@@ -61,7 +61,7 @@ func _physics_process(delta):
 			EnemyCollision.disabled = true
 			EnemySprite.play("Death")
 			SFX.stream = deathSFX
-			SFX.volume_db = -50 + Global.SFX_Volume * (-15+80)
+			SFX.volume_db = -50 + Global.SFX_Volume * (-13+50)
 			SFX.play()
 			await get_tree().create_timer(2).timeout 
 			queue_free()
@@ -131,7 +131,7 @@ func _attack() -> void:
 			if EnemySprite.animation != substate and CooldownTimer.is_stopped():
 				EnemySprite.play(substate)
 				SFX.pitch_scale = randf_range(0.9, 1.1)
-				SFX.volume_db = -50 + Global.SFX_Volume * (volumeMax+80)
+				SFX.volume_db = -50 + Global.SFX_Volume * (volumeMax+50)
 				SFX.play()
 				
 				#Hitbox Generation

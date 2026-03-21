@@ -17,7 +17,7 @@ func _ready():
 func _recieve_hit(_damage: int, _rage: int):
 	if _damage > 0 && owner.health > 0:
 		SFX.pitch_scale = randf_range(0.5, 1.1)
-		SFX.volume_db = -50 + Global.SFX_Volume * (-8+80)
+		SFX.volume_db = -50 + Global.SFX_Volume * (-8+50)
 		SFX.play()
 		owner.health -= _damage
 		owner.modulate = "ff0000"
