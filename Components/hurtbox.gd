@@ -16,8 +16,11 @@ func _ready():
 
 func _recieve_hit(_damage: int, _rage: int):
 	if _damage > 0 && owner.health > 0:
-		SFX.pitch_scale = randf_range(0.7, 0.9)
+		SFX.pitch_scale = randf_range(0.5, 1.1)
 		SFX.play()
 		owner.health -= _damage
+		owner.modulate = "ff0000"
+		await get_tree().create_timer(0.1).timeout
+		owner.modulate = "ffffff"
 	if !owner_hostile:
 		owner.rage += _rage

@@ -9,4 +9,4 @@ SFX = NodePath("SFX")
 
 [node name="SFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_v8y3v")
-pitch_scale = 0.8
+volume_db = -8.0

@@ -60,6 +60,7 @@ func _physics_process(delta):
 			EnemyCollision.disabled = true
 			EnemySprite.play("Death")
 			SFX.stream = deathSFX
+			SFX.volume_db = -15
 			SFX.play()
 			await get_tree().create_timer(2).timeout 
 			queue_free()
