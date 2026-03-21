@@ -17,6 +17,10 @@ This project is for CSE-4453, Game Jam Project
 * Creativekind
 * OcO
 
+## Credit for SFX
+* u_nharq4usid
+* u_xjrmmgxfru
+
 
 ## Requirements:
 * Made with Godot 4
