@@ -8,6 +8,7 @@ class_name PlatformerController2D extends CharacterBody2D
 @export var HitboxSpawn: Node2D
 @export var DashCast: RayCast2D
 @export var SFX: AudioStreamPlayer2D
+@export var hurtbox: Hurtbox
 
 @export_category("Attacks")
 @export var slashHitbox: Shape2D
@@ -124,6 +125,7 @@ func _physics_process(delta):
 	#Overflow Check
 	if (rage > maxRage):
 		currentState = State.OVERFLOW
+		health *= 0.75
 	else:
 		#Extra State Checks in order of priority
 		if (!is_on_floor() and canMove):
@@ -204,5 +206,6 @@ func _on_player_sprite_animation_finished():
 
 func _on_overflow_timeout():
 	if currentState != State.DEAD:
+		rage = maxRage / 3
 		PlayerSprite.play("Idle")
 		currentState = State.IDLE

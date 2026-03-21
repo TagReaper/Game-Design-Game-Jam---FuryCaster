@@ -40,4 +40,6 @@ func _ready() -> void:
 func _on_area_entered(area: Area2D) -> void:
 	if not area.has_method("_recieve_hit"):
 		return
+	if !hostile:
+		get_parent().get_parent().rage += damage
 	area._recieve_hit(damage, rage)

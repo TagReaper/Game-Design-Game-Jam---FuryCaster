@@ -15,7 +15,7 @@ height = 28.0
 radius = 7.0
 height = 26.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("PlayerSprite", "PlayerCollider", "CooldownTimer", "OverflowTimer", "HitboxSpawn", "DashCast", "SFX") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("PlayerSprite", "PlayerCollider", "CooldownTimer", "OverflowTimer", "HitboxSpawn", "DashCast", "SFX", "hurtbox") groups=["Player"]]
 collision_mask = 2
 script = ExtResource("1_exxqv")
 PlayerSprite = NodePath("PlayerSprite")
@@ -25,6 +25,7 @@ OverflowTimer = NodePath("Overflow")
 HitboxSpawn = NodePath("Hitbox Spawn")
 DashCast = NodePath("DashCast")
 SFX = NodePath("SFX")
+hurtbox = NodePath("Hurtbox")
 slashHitbox = SubResource("CapsuleShape2D_fyjlv")
 speed = 6.0
 friction = 0.8
@@ -52,6 +53,7 @@ one_shot = true
 position = Vector2(8, 0)
 
 [node name="DashCast" type="RayCast2D" parent="."]
+position = Vector2(0, 11)
 target_position = Vector2(144, 0)
 collision_mask = 2
 
