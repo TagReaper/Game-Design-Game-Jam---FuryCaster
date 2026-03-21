@@ -21,8 +21,6 @@ This project is for CSE-4453, Game Jam Project
 * u_nharq4usid
 * u_xjrmmgxfru
 * Universfield
-* freesound_community
-
 
 ## Requirements:
 * Made with Godot 4
