@@ -37,6 +37,7 @@ var jumpMultiplier: int = -30
 var deathSFX = preload("res://Audio/SFX/Player Death SFX.mp3")
 var attackSFX = preload("res://Audio/SFX/Player Slash.mp3")
 var dashSFX = preload("res://Audio/SFX/Dash.mp3")
+var jumpSFX = preload("res://Audio/SFX/Jump.mp3")
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var volumeMax: float = SFX.volume_db
  
@@ -81,6 +82,10 @@ func _physics_process(delta):
 	
 	#Jump
 	if (Input.is_action_just_pressed("jump") and canJump):
+		SFX.stream = jumpSFX
+		SFX.pitch_scale = randf_range(1.95, 2.05)
+		SFX.volume_db = -50 + Global.SFX_Volume * (-22+50)
+		SFX.play()
 		jumps += 1
 		velocity.y = jumpPower * jumpMultiplier
 	
@@ -102,7 +107,7 @@ func _physics_process(delta):
 		PlayerCollider.disabled = true
 		SFX.stream = dashSFX
 		SFX.pitch_scale = randf_range(0.95, 1.05)
-		SFX.volume_db = -50 + Global.SFX_Volume * (-8+50)
+		SFX.volume_db = -50 + Global.SFX_Volume * (-18+50)
 		SFX.play()
 		velocity.x = 0
 		dashes += 1
@@ -121,7 +126,7 @@ func _physics_process(delta):
 		PlayerSprite.play("Attack")
 		SFX.stream = attackSFX
 		SFX.pitch_scale = randf_range(0.9, 1.1)
-		SFX.volume_db = -50 + Global.SFX_Volume * (1+50)
+		SFX.volume_db = -50 + Global.SFX_Volume * (2+50)
 		SFX.play()
 		CooldownTimer.start()
 		
