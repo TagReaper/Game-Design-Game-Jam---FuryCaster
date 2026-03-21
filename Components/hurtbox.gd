@@ -1,7 +1,5 @@
 class_name Hurtbox extends Area2D
 
-@onready var owner_health: int = owner.health
-@onready var owner_rage: int = owner.rage
 @export var owner_hostile: bool
 @export var SFX: AudioStreamPlayer2D
 
@@ -17,8 +15,9 @@ func _ready():
 		set_collision_layer_value(5, true)
 
 func _recieve_hit(_damage: int, _rage: int):
-	if _damage > 0:
+	if _damage > 0 && owner.health > 0:
 		SFX.pitch_scale = randf_range(0.7, 0.9)
 		SFX.play()
-		owner_health -= _damage
-	owner_rage += _rage
+		owner.health -= _damage
+	if !owner_hostile:
+		owner.rage += _rage

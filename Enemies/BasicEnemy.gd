@@ -9,6 +9,8 @@ extends CharacterBody2D
 @export var searchCast: RayCast2D
 @export var chaseDetect: Area2D
 @export var SFX: AudioStreamPlayer2D
+@export var overlapCast: RayCast2D
+@export var EnemyCollision: CollisionShape2D
 
 @export_category("Attacks")
 @export var attackHitbox: Shape2D
@@ -31,7 +33,7 @@ extends CharacterBody2D
 
 
 #Internal Variables
-@onready var health = maxHealth
+var health = maxHealth
 @onready var players = get_tree().get_nodes_in_group("Player")
 @onready var player = players[0]
 var moveTo: int
@@ -55,6 +57,7 @@ func _physics_process(delta):
 	if health <= 0:
 		currentState = State.DEAD
 		if EnemySprite.animation != "Death":
+			EnemyCollision.disabled = true
 			EnemySprite.play("Death")
 			SFX.stream = deathSFX
 			SFX.play()
@@ -91,7 +94,7 @@ func _physics_process(delta):
 		_check_animation()
 
 func _move() -> void:
-	if ledgeCast.is_colliding():
+	if ledgeCast.is_colliding() and !overlapCast.is_colliding():
 		if(moveTo - global_position.x > 4):
 			velocity.x = speed * 30
 		elif(moveTo - global_position.x < -4):
@@ -147,10 +150,12 @@ func _flip_check() -> void:
 		EnemySprite.flip_h = false
 		ledgeCast.position.x = 20
 		chaseDetect.position.x = 48
+		overlapCast.position.x = 6
 	elif (moveTo-global_position.x < 0):
 		EnemySprite.flip_h = true
 		ledgeCast.position.x = -20
 		chaseDetect.position.x = -48
+		overlapCast.position.x = -6
 
 func _on_chase_area_body_entered(body):
 	searchCast.target_position = Vector2(0,5)

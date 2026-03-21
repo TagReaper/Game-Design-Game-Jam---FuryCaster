@@ -26,7 +26,7 @@ class_name PlatformerController2D extends CharacterBody2D
 @export var maxRage: int = 100
 
 #Intenal Variables
-@onready var health: int = maxHealth
+var health: int = maxHealth
 var rage: int = 0
 var jumps: int = 0
 var dashes: int = 0

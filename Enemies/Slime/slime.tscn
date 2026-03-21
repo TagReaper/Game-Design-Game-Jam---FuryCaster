@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://luk4mrpgha1r"]
+[gd_scene load_steps=9 format=3 uid="uid://luk4mrpgha1r"]
 
 [ext_resource type="Script" path="res://Enemies/BasicEnemy.gd" id="1_6hh5e"]
 [ext_resource type="SpriteFrames" uid="uid://cma5p5w0jb5tv" path="res://Enemies/Slime/slime.tres" id="2_x43o3"]
 [ext_resource type="AudioStream" uid="uid://k0iyy1w6lxn8" path="res://Audio/SFX/Slime Attack.mp3" id="3_kicqg"]
+[ext_resource type="PackedScene" uid="uid://d0fb8cd3qt8qx" path="res://Components/hurtbox.tscn" id="4_ucekr"]
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_1gep1"]
 points = PackedVector2Array(-14, -11, 0, 0, 14, -11, 8, 4, -8, 4)
@@ -15,9 +16,12 @@ height = 24.0
 radius = 16.0
 height = 256.0
 
-[node name="Slime" type="CharacterBody2D" node_paths=PackedStringArray("EnemySprite", "CooldownTimer", "RoamTimer", "HitboxSpawn", "ledgeCast", "searchCast", "chaseDetect", "SFX")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s503k"]
+size = Vector2(17, 20)
+
+[node name="Slime" type="CharacterBody2D" node_paths=PackedStringArray("EnemySprite", "CooldownTimer", "RoamTimer", "HitboxSpawn", "ledgeCast", "searchCast", "chaseDetect", "SFX", "overlapCast", "EnemyCollision")]
 collision_layer = 4
-collision_mask = 2
+collision_mask = 130
 script = ExtResource("1_6hh5e")
 EnemySprite = NodePath("Slime Sprite")
 CooldownTimer = NodePath("Cooldown")
@@ -27,6 +31,8 @@ ledgeCast = NodePath("LedgeCast")
 searchCast = NodePath("SearchCast")
 chaseDetect = NodePath("ChaseArea")
 SFX = NodePath("SFX")
+overlapCast = NodePath("OverlapCast")
+EnemyCollision = NodePath("Enemy Collision")
 attackHitbox = SubResource("ConvexPolygonShape2D_1gep1")
 attackDamage = 5
 attackRange = 16
@@ -40,6 +46,7 @@ texture_filter = 1
 sprite_frames = ExtResource("2_x43o3")
 animation = &"Idle"
 autoplay = "Idle"
+frame_progress = 0.211027
 
 [node name="Enemy Collision" type="CollisionShape2D" parent="."]
 position = Vector2(0, 8)
@@ -76,6 +83,19 @@ position = Vector2(0, -5)
 [node name="SFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_kicqg")
 volume_db = -5.0
+
+[node name="Hurtbox" parent="." instance=ExtResource("4_ucekr")]
+owner_hostile = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(-6.55671e-08, 8.5)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_s503k")
+
+[node name="OverlapCast" type="RayCast2D" parent="."]
+position = Vector2(6, 0)
+target_position = Vector2(0, 16)
+collision_mask = 4
 
 [connection signal="animation_finished" from="Slime Sprite" to="." method="_on_slime_sprite_animation_finished"]
 [connection signal="timeout" from="Roam" to="." method="_on_roam_timeout"]
