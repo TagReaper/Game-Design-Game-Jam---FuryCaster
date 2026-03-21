@@ -37,5 +37,6 @@ This project is for CSE-4453, Game Jam Project
 * Pixilart.com (for non-credited art)
 ### Sound Design Tools
 * JSFXR (for non-credited SFX)
+* https://audiotrimmer.com
 ### Music
 * Music by WaterFlame | https://waterflame.newgrounds.com/audio
