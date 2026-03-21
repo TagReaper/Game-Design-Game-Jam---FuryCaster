@@ -29,9 +29,9 @@ mesh = SubResource("BoxMesh_2q02k")
 position = Vector2(96, -81)
 zoom = Vector2(2, 2)
 
+[node name="Player" parent="." instance=ExtResource("1_80dxn")]
+position = Vector2(-124, -121)
+
 [node name="Slime" parent="." instance=ExtResource("1_wxnq6")]
 position = Vector2(144, -45)
 rightLimitX = 144
-
-[node name="Player" parent="." instance=ExtResource("1_80dxn")]
-position = Vector2(-351, -45)

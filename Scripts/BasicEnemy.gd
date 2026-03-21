@@ -69,6 +69,11 @@ func _physics_process(delta):
 			_flip_check()
 			_move()
 		State.SEARCH:
+			searchCast.target_position = player.global_position - global_position
+			if !searchCast.is_colliding():
+				moveTo = player.global_position.x
+			else:
+				currentState = State.ROAM
 			_flip_check()
 			_move()
 		State.DEAD:
