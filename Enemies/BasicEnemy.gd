@@ -39,6 +39,7 @@ var health = maxHealth
 var moveTo: int
 var deathSFX= preload("res://Audio/SFX/Enemy Death SFX.mp3")
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+var player_pos: Vector2
 
 #State Handler
 enum State {ROAM, CHASE, SEARCH, ATTACK, DEAD}
@@ -49,7 +50,6 @@ func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
-	
 	
 	if player.health <= 0:
 		currentState = State.ROAM
@@ -72,7 +72,7 @@ func _physics_process(delta):
 				_flip_check()
 				_move()
 			State.CHASE:
-				var player_pos = player.global_position
+				player_pos = player.global_position
 				if (global_position.distance_to(player_pos) < attackRange):
 					currentState = State.ATTACK
 				elif global_position.distance_to(player_pos) > chaseRange:
@@ -84,9 +84,10 @@ func _physics_process(delta):
 				_flip_check()
 				_move()
 			State.SEARCH:
-				searchCast.target_position = player.global_position - global_position
+				player_pos = player.global_position
+				searchCast.target_position = player_pos - global_position
 				if !searchCast.is_colliding():
-					moveTo = player.global_position.x
+					moveTo = player_pos.x
 				else:
 					searchCast.target_position = Vector2(0,5)
 					currentState = State.ROAM
