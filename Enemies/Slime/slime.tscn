@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://luk4mrpgha1r"]
 
-[ext_resource type="Script" path="res://Scripts/BasicEnemy.gd" id="1_a5ij1"]
+[ext_resource type="Script" path="res://Enemies/BasicEnemy.gd" id="1_6hh5e"]
 [ext_resource type="SpriteFrames" uid="uid://cma5p5w0jb5tv" path="res://Enemies/Slime/slime.tres" id="2_x43o3"]
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_1gep1"]
@@ -17,7 +17,7 @@ height = 256.0
 [node name="Slime" type="CharacterBody2D" node_paths=PackedStringArray("EnemySprite", "CooldownTimer", "RoamTimer", "HitboxSpawn", "ledgeCast", "searchCast", "chaseDetect")]
 collision_layer = 4
 collision_mask = 2
-script = ExtResource("1_a5ij1")
+script = ExtResource("1_6hh5e")
 EnemySprite = NodePath("Slime Sprite")
 CooldownTimer = NodePath("Cooldown")
 RoamTimer = NodePath("Roam")
@@ -71,6 +71,8 @@ shape = SubResource("CapsuleShape2D_2few0")
 
 [node name="Hitbox Spawn" type="Node2D" parent="."]
 position = Vector2(0, -5)
+
+[node name="Attack SFX" type="AudioStreamPlayer2D" parent="."]
 
 [connection signal="animation_finished" from="Slime Sprite" to="." method="_on_slime_sprite_animation_finished"]
 [connection signal="timeout" from="Roam" to="." method="_on_roam_timeout"]

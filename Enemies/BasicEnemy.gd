@@ -8,6 +8,7 @@ extends CharacterBody2D
 @export var ledgeCast: RayCast2D
 @export var searchCast: RayCast2D
 @export var chaseDetect: Area2D
+@export var SFX: AudioStreamPlayer2D
 
 @export_category("Attacks")
 @export var attackHitbox: Shape2D
@@ -34,14 +35,13 @@ extends CharacterBody2D
 @onready var players = get_tree().get_nodes_in_group("Player")
 @onready var player = players[0]
 var moveTo: int
+var deathSFX= preload("res://Audio/SFX/Enemy Death SFX.mp3")
+var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 #State Handler
 enum State {ROAM, CHASE, SEARCH, ATTACK, DEAD}
 var currentState = State.ROAM
 var substate : String
-
-# Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -50,6 +50,10 @@ func _physics_process(delta):
 	
 	if health <= 0:
 		currentState = State.DEAD
+		if EnemySprite.animation != "Death":
+			EnemySprite.play("Death")
+			SFX.stream = deathSFX
+			SFX.play()
 	
 	match currentState:
 		State.ROAM:

@@ -7,6 +7,7 @@ class_name PlatformerController2D extends CharacterBody2D
 @export var OverflowTimer: Timer
 @export var HitboxSpawn: Node2D
 @export var DashCast: RayCast2D
+@export var SFX: AudioStreamPlayer2D
 
 @export_category("Attacks")
 @export var slashHitbox: Shape2D
@@ -32,6 +33,7 @@ var dashes: int = 0
 var dashPositionX: int
 var speedMultiplier: int = 30
 var jumpMultiplier: int = -30
+var deathSFX = preload("res://Audio/SFX/Player Death SFX.mp3")
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
  
 #State Handler
@@ -130,6 +132,8 @@ func _physics_process(delta):
 	
 	if (health <= 0):
 		if PlayerSprite.animation != "Death":
+			SFX.stream = deathSFX
+			SFX.play()
 			PlayerSprite.play("Death")
 	
 	match PlayerSprite.animation:

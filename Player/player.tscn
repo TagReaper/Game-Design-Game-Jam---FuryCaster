@@ -48,5 +48,7 @@ position = Vector2(8, 0)
 target_position = Vector2(144, 0)
 collision_mask = 2
 
+[node name="Attack SFX" type="AudioStreamPlayer2D" parent="."]
+
 [connection signal="animation_finished" from="PlayerSprite" to="." method="_on_player_sprite_animation_finished"]
 [connection signal="timeout" from="Overflow" to="." method="_on_overflow_timeout"]

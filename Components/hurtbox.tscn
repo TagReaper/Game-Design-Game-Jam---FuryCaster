@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0fb8cd3qt8qx"]
+
+[ext_resource type="Script" path="res://Components/hurtbox.gd" id="1_dyvwq"]
+
+[node name="Hurtbox" type="Area2D"]
+script = ExtResource("1_dyvwq")
+
+[node name="SFX" type="AudioStreamPlayer2D" parent="."]
