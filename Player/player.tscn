@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://crivg37iaxi26"]
+[gd_scene load_steps=6 format=3 uid="uid://crivg37iaxi26"]
 
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_exxqv"]
 [ext_resource type="SpriteFrames" uid="uid://brqumy5qx2ufx" path="res://Player/PlayerSpriteFrames.tres" id="1_sxu62"]
+[ext_resource type="AudioStream" uid="uid://df1n18sspvqk1" path="res://Audio/SFX/Player Slash.mp3" id="3_gn030"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fyjlv"]
 
@@ -9,7 +10,7 @@
 radius = 9.0
 height = 26.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("PlayerSprite", "PlayerCollider", "CooldownTimer", "OverflowTimer", "HitboxSpawn", "DashCast") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("PlayerSprite", "PlayerCollider", "CooldownTimer", "OverflowTimer", "HitboxSpawn", "DashCast", "SFX") groups=["Player"]]
 collision_mask = 2
 script = ExtResource("1_exxqv")
 PlayerSprite = NodePath("PlayerSprite")
@@ -18,6 +19,7 @@ CooldownTimer = NodePath("Cooldown")
 OverflowTimer = NodePath("Overflow")
 HitboxSpawn = NodePath("Hitbox Spawn")
 DashCast = NodePath("DashCast")
+SFX = NodePath("SFX")
 slashHitbox = SubResource("CapsuleShape2D_fyjlv")
 speed = 6.0
 friction = 0.8
@@ -48,7 +50,8 @@ position = Vector2(8, 0)
 target_position = Vector2(144, 0)
 collision_mask = 2
 
-[node name="Attack SFX" type="AudioStreamPlayer2D" parent="."]
+[node name="SFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_gn030")
 
 [connection signal="animation_finished" from="PlayerSprite" to="." method="_on_player_sprite_animation_finished"]
 [connection signal="timeout" from="Overflow" to="." method="_on_overflow_timeout"]

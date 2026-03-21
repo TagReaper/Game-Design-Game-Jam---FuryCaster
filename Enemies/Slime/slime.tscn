@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://luk4mrpgha1r"]
+[gd_scene load_steps=7 format=3 uid="uid://luk4mrpgha1r"]
 
 [ext_resource type="Script" path="res://Enemies/BasicEnemy.gd" id="1_6hh5e"]
 [ext_resource type="SpriteFrames" uid="uid://cma5p5w0jb5tv" path="res://Enemies/Slime/slime.tres" id="2_x43o3"]
+[ext_resource type="AudioStream" uid="uid://k0iyy1w6lxn8" path="res://Audio/SFX/Slime Attack.mp3" id="3_kicqg"]
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_1gep1"]
 points = PackedVector2Array(-14, -11, 0, 0, 14, -11, 8, 4, -8, 4)
@@ -14,7 +15,7 @@ height = 24.0
 radius = 16.0
 height = 256.0
 
-[node name="Slime" type="CharacterBody2D" node_paths=PackedStringArray("EnemySprite", "CooldownTimer", "RoamTimer", "HitboxSpawn", "ledgeCast", "searchCast", "chaseDetect")]
+[node name="Slime" type="CharacterBody2D" node_paths=PackedStringArray("EnemySprite", "CooldownTimer", "RoamTimer", "HitboxSpawn", "ledgeCast", "searchCast", "chaseDetect", "SFX")]
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_6hh5e")
@@ -25,6 +26,7 @@ HitboxSpawn = NodePath("Hitbox Spawn")
 ledgeCast = NodePath("LedgeCast")
 searchCast = NodePath("SearchCast")
 chaseDetect = NodePath("ChaseArea")
+SFX = NodePath("SFX")
 attackHitbox = SubResource("ConvexPolygonShape2D_1gep1")
 attackDamage = 5
 attackRange = 16
@@ -36,9 +38,8 @@ chaseRange = 192
 [node name="Slime Sprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = ExtResource("2_x43o3")
-animation = &"Attack"
+animation = &"Idle"
 autoplay = "Idle"
-frame = 1
 
 [node name="Enemy Collision" type="CollisionShape2D" parent="."]
 position = Vector2(0, 8)
@@ -72,7 +73,9 @@ shape = SubResource("CapsuleShape2D_2few0")
 [node name="Hitbox Spawn" type="Node2D" parent="."]
 position = Vector2(0, -5)
 
-[node name="Attack SFX" type="AudioStreamPlayer2D" parent="."]
+[node name="SFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_kicqg")
+volume_db = -5.0
 
 [connection signal="animation_finished" from="Slime Sprite" to="." method="_on_slime_sprite_animation_finished"]
 [connection signal="timeout" from="Roam" to="." method="_on_roam_timeout"]

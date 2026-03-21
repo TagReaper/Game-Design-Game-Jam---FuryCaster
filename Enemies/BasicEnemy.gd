@@ -48,43 +48,47 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	
+	
+	if player.health <= 0:
+		currentState = State.ROAM
+	
 	if health <= 0:
 		currentState = State.DEAD
 		if EnemySprite.animation != "Death":
 			EnemySprite.play("Death")
 			SFX.stream = deathSFX
 			SFX.play()
-	
-	match currentState:
-		State.ROAM:
-			if RoamTimer.is_stopped():
-				RoamTimer.start()
-			_flip_check()
-			_move()
-		State.CHASE:
-			if (global_position.distance_to(player.global_position) < attackRange):
-				currentState = State.ATTACK
-			elif global_position.distance_to(player.global_position) > chaseRange:
-				currentState = State.SEARCH
-			elif moveTo-global_position.x > 0:
-				moveTo = player.global_position.x - attackRange + 8
-			else:
-				moveTo = player.global_position.x + attackRange - 8
-			_flip_check()
-			_move()
-		State.SEARCH:
-			searchCast.target_position = player.global_position - global_position
-			if !searchCast.is_colliding():
-				moveTo = player.global_position.x
-			else:
-				currentState = State.ROAM
-			_flip_check()
-			_move()
-		State.DEAD:
-			EnemySprite.play("Death")
 			await get_tree().create_timer(2).timeout 
 			queue_free()
-	_check_animation()
+	else:
+		match currentState:
+			State.ROAM:
+				if RoamTimer.is_stopped():
+					RoamTimer.start()
+				_flip_check()
+				_move()
+			State.CHASE:
+				var player_pos = player.global_position
+				if (global_position.distance_to(player_pos) < attackRange):
+					currentState = State.ATTACK
+				elif global_position.distance_to(player_pos) > chaseRange:
+					currentState = State.SEARCH
+				elif player_pos.x-global_position.x > 0 and abs(player_pos.y-global_position.y) < 8:
+					moveTo = player_pos.x - attackRange + 8
+				else:
+					moveTo = player_pos.x + attackRange - 8
+				_flip_check()
+				_move()
+			State.SEARCH:
+				searchCast.target_position = player.global_position - global_position
+				if !searchCast.is_colliding():
+					moveTo = player.global_position.x
+				else:
+					searchCast.target_position = Vector2(0,5)
+					currentState = State.ROAM
+				_flip_check()
+				_move()
+		_check_animation()
 
 func _move() -> void:
 	if ledgeCast.is_colliding():
@@ -120,13 +124,15 @@ func _attack() -> void:
 		"Attack":
 			if EnemySprite.animation != substate and CooldownTimer.is_stopped():
 				EnemySprite.play(substate)
+				SFX.pitch_scale = randf_range(0.9, 1.1)
+				SFX.play()
 				
 				#Hitbox Generation
 				await get_tree().create_timer(hitboxDelay).timeout
 				var hitbox = Hitbox.new(attackDamage, rage, hitboxLifetime, attackHitbox, true)
 				HitboxSpawn.add_child(hitbox)
 				var hitbox2 = Hitbox.new(0, rage, hitboxLifetime, attackHitbox, true)
-				hitbox2.scale *= 2
+				hitbox2.scale *= 3
 				HitboxSpawn.add_child(hitbox2)
 				
 				CooldownTimer.start()
@@ -147,6 +153,7 @@ func _flip_check() -> void:
 		chaseDetect.position.x = -48
 
 func _on_chase_area_body_entered(body):
+	searchCast.target_position = Vector2(0,5)
 	currentState = State.CHASE
 
 func _on_slime_sprite_animation_finished():

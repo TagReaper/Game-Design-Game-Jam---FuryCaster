@@ -17,5 +17,8 @@ func _ready():
 		set_collision_layer_value(5, true)
 
 func _recieve_hit(_damage: int, _rage: int):
-	owner_health -= _damage
+	if _damage > 0:
+		SFX.pitch_scale = randf_range(0.7, 0.9)
+		SFX.play()
+		owner_health -= _damage
 	owner_rage += _rage

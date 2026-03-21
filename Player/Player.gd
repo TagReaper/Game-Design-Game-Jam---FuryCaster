@@ -109,6 +109,8 @@ func _physics_process(delta):
 	if (Input.is_action_just_pressed("attack") and canAttack):
 		#Animation + Cooldown
 		PlayerSprite.play("Attack")
+		SFX.pitch_scale = randf_range(0.9, 1.1)
+		SFX.play()
 		CooldownTimer.start()
 		
 		#Hitbox Generation
