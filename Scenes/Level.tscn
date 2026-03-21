@@ -11,7 +11,11 @@ size = Vector3(128, 3, 1)
 
 [node name="Level" type="Node2D"]
 
-[node name="Ground" type="Node2D" parent="."]
+[node name="Paralax Background" type="Node" parent="."]
+
+[node name="Background Details" type="Node" parent="."]
+
+[node name="Ground" type="Node" parent="."]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Ground"]
 position = Vector2(279, 0)
@@ -38,6 +42,12 @@ shape = SubResource("RectangleShape2D_dx4fs")
 scale = Vector2(1, 0.959255)
 mesh = SubResource("BoxMesh_2q02k")
 
+[node name="Enemies" type="Node" parent="."]
+
+[node name="Slime" parent="Enemies" instance=ExtResource("1_wxnq6")]
+position = Vector2(144, -45)
+rightLimitX = 144
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(96, -81)
 zoom = Vector2(2, 2)
@@ -46,6 +56,4 @@ zoom = Vector2(2, 2)
 position = Vector2(-124, -121)
 slashDamage = 3
 
-[node name="Slime" parent="." instance=ExtResource("1_wxnq6")]
-position = Vector2(144, -45)
-rightLimitX = 144
+[node name="Foreground" type="Node" parent="."]
