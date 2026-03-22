@@ -51,8 +51,6 @@ var canAttack: bool = true
 var canDash: bool = true
 
 func _physics_process(delta):
-	$Music.volume_db = -50 + Global.SFX_Volume * (-15+50)
-	
 	#Able Checks
 	if (is_on_floor()):
 		jumps = 0

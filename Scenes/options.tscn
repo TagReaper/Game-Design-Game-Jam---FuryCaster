@@ -209,7 +209,7 @@ stream = ExtResource("4_ayrm3")
 volume_db = -15.0
 autoplay = true
 
-[connection signal="drag_ended" from="VBoxContainer2/SFX" to="." method="_on_sfx_drag_ended"]
-[connection signal="drag_ended" from="VBoxContainer2/Music" to="." method="_on_music_drag_ended"]
+[connection signal="value_changed" from="VBoxContainer2/SFX" to="." method="_on_sfx_value_changed"]
+[connection signal="value_changed" from="VBoxContainer2/Music" to="." method="_on_music_value_changed"]
 [connection signal="toggled" from="VBoxContainer2/Label3/CheckBox" to="." method="_on_check_box_toggled"]
 [connection signal="pressed" from="VBoxContainer2/Return" to="." method="_on_return_pressed"]

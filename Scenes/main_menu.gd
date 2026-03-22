@@ -2,7 +2,7 @@ extends Control
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	$AudioStreamPlayer.volume_db = -50 + Global.MUSIC_Volume * (-15+50)
+	$AudioStreamPlayer.volume_db = -80 + Global.MUSIC_Volume * (-15+80)
 
 
 func _on_start_pressed():
