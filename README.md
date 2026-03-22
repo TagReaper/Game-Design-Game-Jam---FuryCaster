@@ -16,7 +16,7 @@ This project is for CSE-4453, Game Jam Project
 * Penzilla
 * Creativekind
 * OcO
-* Star Crush Font: Pikgura Type
+* jeti
 
 ## Credit for SFX
 * u_nharq4usid
