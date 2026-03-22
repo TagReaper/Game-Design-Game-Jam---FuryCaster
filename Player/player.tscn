@@ -1,25 +1,85 @@
-[gd_scene load_steps=8 format=3 uid="uid://crivg37iaxi26"]
+[gd_scene load_steps=22 format=3 uid="uid://crivg37iaxi26"]
 
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_exxqv"]
 [ext_resource type="SpriteFrames" uid="uid://brqumy5qx2ufx" path="res://Player/PlayerSpriteFrames.tres" id="1_sxu62"]
-[ext_resource type="AudioStream" uid="uid://df1n18sspvqk1" path="res://Audio/SFX/Player Slash.mp3" id="3_gn030"]
+[ext_resource type="AudioStream" uid="uid://25rrf5kvwn1j" path="res://Audio/SFX/Jump.mp3" id="3_ivqu4"]
 [ext_resource type="PackedScene" uid="uid://d0fb8cd3qt8qx" path="res://Components/hurtbox.tscn" id="4_4ypy4"]
+[ext_resource type="AudioStream" uid="uid://sr6g57vhjnpu" path="res://Audio/Music/WF_Scientific-Ambience.mp3" id="5_gkjre"]
+[ext_resource type="Script" path="res://Player/UI+Options.gd" id="6_pt3s0"]
+[ext_resource type="FontFile" uid="uid://dmrqcor2emhro" path="res://UI/GrapeSoda.ttf" id="7_45u1q"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fyjlv"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ehols"]
 radius = 9.0
-height = 28.0
+height = 27.5
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yrima"]
 radius = 7.0
 height = 26.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("PlayerSprite", "PlayerCollider", "CooldownTimer", "OverflowTimer", "HitboxSpawn", "DashCast", "SFX", "hurtbox") groups=["Player"]]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3kukr"]
+bg_color = Color(0.152941, 0.152941, 0.152941, 1)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+
+[sub_resource type="Theme" id="Theme_jf0jp"]
+default_font = ExtResource("7_45u1q")
+default_font_size = 80
+
+[sub_resource type="Theme" id="Theme_6a3ag"]
+default_font = ExtResource("7_45u1q")
+default_font_size = 40
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_ylkgn"]
+color = Color(1, 1, 1, 1)
+thickness = 8
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_mvg5f"]
+color = Color(0.137255, 0.372549, 1, 1)
+thickness = 8
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uvykf"]
+
+[sub_resource type="Theme" id="Theme_musv4"]
+default_font = ExtResource("7_45u1q")
+default_font_size = 60
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ekt88"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 5
+shadow_offset = Vector2(0, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qqb6y"]
+bg_color = Color(0.74902, 0.74902, 0.74902, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 5
+shadow_offset = Vector2(0, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_laevw"]
+bg_color = Color(0.447059, 0.447059, 0.447059, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 5
+shadow_offset = Vector2(0, 5)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kfjek"]
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("PlayerSprite", "CooldownTimer", "OverflowTimer", "HitboxSpawn", "DashCast", "SFX", "hurtbox") groups=["Player"]]
 collision_mask = 2
 script = ExtResource("1_exxqv")
 PlayerSprite = NodePath("PlayerSprite")
-PlayerCollider = NodePath("PlayerCollision")
 CooldownTimer = NodePath("Cooldown")
 OverflowTimer = NodePath("Overflow")
 HitboxSpawn = NodePath("Hitbox Spawn")
@@ -28,7 +88,15 @@ SFX = NodePath("SFX")
 hurtbox = NodePath("Hurtbox")
 slashHitbox = SubResource("CapsuleShape2D_fyjlv")
 speed = 6.0
+jumpPower = 11.0
 friction = 0.8
+
+[node name="Camera2D" type="Camera2D" parent="."]
+process_mode = 3
+position = Vector2(0, -32)
+zoom = Vector2(2.5, 2.5)
+position_smoothing_enabled = true
+position_smoothing_speed = 6.0
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -58,7 +126,10 @@ target_position = Vector2(144, 0)
 collision_mask = 2
 
 [node name="SFX" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_gn030")
+process_mode = 3
+stream = ExtResource("3_ivqu4")
+volume_db = -15.0
+pitch_scale = 2.0
 
 [node name="Hurtbox" parent="." instance=ExtResource("4_4ypy4")]
 
@@ -66,5 +137,155 @@ stream = ExtResource("3_gn030")
 position = Vector2(0, 3)
 shape = SubResource("CapsuleShape2D_yrima")
 
+[node name="UI+Options" type="CanvasLayer" parent="."]
+process_mode = 3
+script = ExtResource("6_pt3s0")
+
+[node name="Options" type="Control" parent="UI+Options"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Backdrop" type="Panel" parent="UI+Options/Options"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 347.0
+offset_top = 102.0
+offset_right = 766.0
+offset_bottom = 516.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_3kukr")
+
+[node name="Label" type="Label" parent="UI+Options/Options"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 161.0
+offset_top = 85.0
+offset_right = 952.0
+offset_bottom = 249.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_jf0jp")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+text = "Paused
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="UI+Options/Options"]
+layout_mode = 0
+offset_left = 401.0
+offset_top = 223.0
+offset_right = 752.0
+offset_bottom = 515.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="UI+Options/Options/VBoxContainer2"]
+layout_mode = 2
+theme = SubResource("Theme_6a3ag")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+text = "Sound Effect Volume
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SFX" type="HSlider" parent="UI+Options/Options/VBoxContainer2"]
+layout_mode = 2
+theme_override_styles/slider = SubResource("StyleBoxLine_ylkgn")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_mvg5f")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_mvg5f")
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="Label2" type="Label" parent="UI+Options/Options/VBoxContainer2"]
+layout_mode = 2
+theme = SubResource("Theme_6a3ag")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+text = "Music Volume
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Music" type="HSlider" parent="UI+Options/Options/VBoxContainer2"]
+layout_mode = 2
+theme_override_styles/slider = SubResource("StyleBoxLine_ylkgn")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_mvg5f")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_mvg5f")
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="Label3" type="Label" parent="UI+Options/Options/VBoxContainer2"]
+layout_mode = 2
+theme = SubResource("Theme_6a3ag")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+text = "Toggle Fullscreen
+"
+vertical_alignment = 1
+
+[node name="CheckBox" type="CheckBox" parent="UI+Options/Options/VBoxContainer2/Label3"]
+layout_mode = 2
+offset_left = 290.0
+offset_top = -4.0
+offset_right = 314.0
+offset_bottom = 20.0
+scale = Vector2(2, 2)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_uvykf")
+alignment = 1
+icon_alignment = 1
+
+[node name="Return" type="Button" parent="UI+Options/Options/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme = SubResource("Theme_musv4")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_ekt88")
+theme_override_styles/hover = SubResource("StyleBoxFlat_qqb6y")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_laevw")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_kfjek")
+text = "Quit Game
+"
+
+[node name="Music" type="AudioStreamPlayer" parent="UI+Options"]
+process_mode = 3
+stream = ExtResource("5_gkjre")
+volume_db = -15.0
+autoplay = true
+
+[node name="UI" type="Control" parent="UI+Options"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
 [connection signal="animation_finished" from="PlayerSprite" to="." method="_on_player_sprite_animation_finished"]
 [connection signal="timeout" from="Overflow" to="." method="_on_overflow_timeout"]
+[connection signal="value_changed" from="UI+Options/Options/VBoxContainer2/SFX" to="UI+Options" method="_on_sfx_value_changed"]
+[connection signal="value_changed" from="UI+Options/Options/VBoxContainer2/Music" to="UI+Options" method="_on_music_value_changed"]
+[connection signal="toggled" from="UI+Options/Options/VBoxContainer2/Label3/CheckBox" to="UI+Options" method="_on_check_box_toggled"]
+[connection signal="pressed" from="UI+Options/Options/VBoxContainer2/Return" to="UI+Options" method="_on_return_pressed"]

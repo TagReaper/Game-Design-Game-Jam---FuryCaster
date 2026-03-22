@@ -1,0 +1,62 @@
+[gd_scene load_steps=6 format=3 uid="uid://cnajtpsnc4ua1"]
+
+[ext_resource type="Script" path="res://Scripts/loading_screen.gd" id="1_rrguy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kjhdm"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_uca1f"]
+resource_name = "transition"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_1867f"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lrry1"]
+_data = {
+"RESET": SubResource("Animation_1867f"),
+"transition": SubResource("Animation_uca1f")
+}
+
+[node name="LoadingScreen" type="CanvasLayer" node_paths=PackedStringArray("animation_player")]
+layer = 100
+script = ExtResource("1_rrguy")
+animation_player = NodePath("AnimationPlayer")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_kjhdm")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_lrry1")
+}
+autoplay = "transition"

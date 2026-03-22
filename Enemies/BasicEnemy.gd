@@ -39,6 +39,8 @@ var health = maxHealth
 var moveTo: int
 var deathSFX= preload("res://Audio/SFX/Enemy Death SFX.mp3")
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+var player_pos: Vector2
+@onready var volumeMax: float = SFX.volume_db
 
 #State Handler
 enum State {ROAM, CHASE, SEARCH, ATTACK, DEAD}
@@ -50,7 +52,6 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	
-	
 	if player.health <= 0:
 		currentState = State.ROAM
 	
@@ -60,7 +61,7 @@ func _physics_process(delta):
 			EnemyCollision.disabled = true
 			EnemySprite.play("Death")
 			SFX.stream = deathSFX
-			SFX.volume_db = -15
+			SFX.volume_db = -50 + Global.SFX_Volume * (-13+50)
 			SFX.play()
 			await get_tree().create_timer(2).timeout 
 			queue_free()
@@ -68,11 +69,11 @@ func _physics_process(delta):
 		match currentState:
 			State.ROAM:
 				if RoamTimer.is_stopped():
-					RoamTimer.start()
+					RoamTimer.start(randf_range(1,3))
 				_flip_check()
 				_move()
 			State.CHASE:
-				var player_pos = player.global_position
+				player_pos = player.global_position
 				if (global_position.distance_to(player_pos) < attackRange):
 					currentState = State.ATTACK
 				elif global_position.distance_to(player_pos) > chaseRange:
@@ -84,9 +85,10 @@ func _physics_process(delta):
 				_flip_check()
 				_move()
 			State.SEARCH:
-				searchCast.target_position = player.global_position - global_position
+				player_pos = player.global_position
+				searchCast.target_position = player_pos - global_position
 				if !searchCast.is_colliding():
-					moveTo = player.global_position.x
+					moveTo = player_pos.x
 				else:
 					searchCast.target_position = Vector2(0,5)
 					currentState = State.ROAM
@@ -129,6 +131,7 @@ func _attack() -> void:
 			if EnemySprite.animation != substate and CooldownTimer.is_stopped():
 				EnemySprite.play(substate)
 				SFX.pitch_scale = randf_range(0.9, 1.1)
+				SFX.volume_db = -50 + Global.SFX_Volume * (volumeMax+50)
 				SFX.play()
 				
 				#Hitbox Generation
@@ -149,12 +152,12 @@ func _attack() -> void:
 func _flip_check() -> void:
 	if (moveTo-global_position.x > 0):
 		EnemySprite.flip_h = false
-		ledgeCast.position.x = 20
+		ledgeCast.position.x = 12
 		chaseDetect.position.x = 48
 		overlapCast.position.x = 6
 	elif (moveTo-global_position.x < 0):
 		EnemySprite.flip_h = true
-		ledgeCast.position.x = -20
+		ledgeCast.position.x = -12
 		chaseDetect.position.x = -48
 		overlapCast.position.x = -6
 
