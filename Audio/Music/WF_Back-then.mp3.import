@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/WF_Back-then.mp3-7f45aa4cc9b3696f78d9d45e1811
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0
