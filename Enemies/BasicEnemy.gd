@@ -33,7 +33,7 @@ extends CharacterBody2D
 
 
 #Internal Variables
-var health = maxHealth
+@onready var health = maxHealth
 @onready var players = get_tree().get_nodes_in_group("Player")
 @onready var player = players[0]
 var moveTo: int
@@ -59,6 +59,7 @@ func _physics_process(delta):
 		currentState = State.DEAD
 		if EnemySprite.animation != "Death":
 			EnemyCollision.disabled = true
+			$Hurtbox.monitorable = false
 			EnemySprite.play("Death")
 			SFX.stream = deathSFX
 			SFX.volume_db = -50 + Global.SFX_Volume * (-13+50)

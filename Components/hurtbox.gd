@@ -2,6 +2,8 @@ class_name Hurtbox extends Area2D
 
 @export var owner_hostile: bool
 @export var SFX: AudioStreamPlayer2D
+@export var HealthbarController: Control
+@export var RagebarController: Control
 @onready var controllers = get_tree().get_nodes_in_group("Controllers")
 @onready var pauseController = controllers[0]
 
@@ -26,6 +28,11 @@ func _recieve_hit(_damage: int, _rage: int):
 		owner.modulate = "ff0000"
 		await get_tree().create_timer(0.1).timeout
 		owner.modulate = "ffffff"
-		pauseController.freeze_frame(.08)
+		if HealthbarController:
+			HealthbarController._health_bar_change()
+		pauseController.freeze_frame(0.08)
 	if !owner_hostile:
 		owner.rage += _rage
+		owner.rageTimer.start()
+		if RagebarController:
+			RagebarController._rage_bar_change()

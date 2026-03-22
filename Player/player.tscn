@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://crivg37iaxi26"]
+[gd_scene load_steps=34 format=3 uid="uid://crivg37iaxi26"]
 
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_exxqv"]
 [ext_resource type="SpriteFrames" uid="uid://brqumy5qx2ufx" path="res://Player/PlayerSpriteFrames.tres" id="1_sxu62"]
@@ -7,6 +7,18 @@
 [ext_resource type="AudioStream" uid="uid://sr6g57vhjnpu" path="res://Audio/Music/WF_Scientific-Ambience.mp3" id="5_gkjre"]
 [ext_resource type="Script" path="res://Player/UI+Options.gd" id="6_pt3s0"]
 [ext_resource type="FontFile" uid="uid://dmrqcor2emhro" path="res://UI/GrapeSoda.ttf" id="7_45u1q"]
+[ext_resource type="Texture2D" uid="uid://b34upkivta5jo" path="res://UI/pixil-frame-0 (1).png" id="8_cmgtk"]
+[ext_resource type="Script" path="res://Scripts/Healthbar.gd" id="8_nw10w"]
+[ext_resource type="Texture2D" uid="uid://dugn6tyqfsp8g" path="res://UI/pixil-frame-0 (8).png" id="9_0ibnf"]
+[ext_resource type="Texture2D" uid="uid://bgnbuuk6700st" path="res://UI/pixil-frame-0 (5).png" id="10_06qlw"]
+[ext_resource type="Texture2D" uid="uid://blkix4s0solip" path="res://UI/pixil-frame-0 (2).png" id="10_tmrn8"]
+[ext_resource type="Texture2D" uid="uid://snvg3p6urgs6" path="res://UI/pixil-frame-0 (6).png" id="11_nm0b4"]
+[ext_resource type="Texture2D" uid="uid://bphbokiwehha6" path="res://UI/pixil-frame-0 (7).png" id="12_w3ow2"]
+[ext_resource type="Script" path="res://Player/Ragebar.gd" id="13_riq4c"]
+[ext_resource type="Texture2D" uid="uid://dua2nlw16ks7h" path="res://UI/pixil-frame-0 (3).png" id="14_d4y12"]
+[ext_resource type="Texture2D" uid="uid://bug67uxkl5lk7" path="res://UI/pixil-frame-0 (4).png" id="15_55t0w"]
+[ext_resource type="Texture2D" uid="uid://dgw8ll05ui6e4" path="res://UI/pixil-frame-0 (11).png" id="18_0lkxr"]
+[ext_resource type="Texture2D" uid="uid://brxhch1rpvyoj" path="res://UI/pixil-frame-0 (10).png" id="19_cburk"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fyjlv"]
 
@@ -76,7 +88,7 @@ shadow_offset = Vector2(0, 5)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kfjek"]
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("PlayerSprite", "CooldownTimer", "OverflowTimer", "HitboxSpawn", "DashCast", "SFX", "hurtbox") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("PlayerSprite", "CooldownTimer", "OverflowTimer", "HitboxSpawn", "DashCast", "SFX", "hurtbox", "rageTimer") groups=["Player"]]
 collision_mask = 2
 script = ExtResource("1_exxqv")
 PlayerSprite = NodePath("PlayerSprite")
@@ -86,6 +98,7 @@ HitboxSpawn = NodePath("Hitbox Spawn")
 DashCast = NodePath("DashCast")
 SFX = NodePath("SFX")
 hurtbox = NodePath("Hurtbox")
+rageTimer = NodePath("RageTimer")
 slashHitbox = SubResource("CapsuleShape2D_fyjlv")
 speed = 6.0
 jumpPower = 11.0
@@ -117,6 +130,10 @@ one_shot = true
 wait_time = 3.0
 one_shot = true
 
+[node name="RageTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
 [node name="Hitbox Spawn" type="Node2D" parent="."]
 position = Vector2(8, 0)
 
@@ -131,7 +148,9 @@ stream = ExtResource("3_ivqu4")
 volume_db = -15.0
 pitch_scale = 2.0
 
-[node name="Hurtbox" parent="." instance=ExtResource("4_4ypy4")]
+[node name="Hurtbox" parent="." node_paths=PackedStringArray("HealthbarController", "RagebarController") instance=ExtResource("4_4ypy4")]
+HealthbarController = NodePath("../UI+Options/UI/Healthbar")
+RagebarController = NodePath("../UI+Options/UI/Ragebar")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(0, 3)
@@ -142,6 +161,8 @@ process_mode = 3
 script = ExtResource("6_pt3s0")
 
 [node name="Options" type="Control" parent="UI+Options"]
+visible = false
+texture_filter = 1
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -278,14 +299,126 @@ volume_db = -15.0
 autoplay = true
 
 [node name="UI" type="Control" parent="UI+Options"]
+texture_filter = 1
 layout_mode = 3
+anchors_preset = 0
+offset_left = 33.0
+offset_right = 73.0
+offset_bottom = 40.0
+scale = Vector2(3, 3)
+metadata/_edit_use_anchors_ = true
+
+[node name="Healthbar" type="Control" parent="UI+Options/UI" node_paths=PackedStringArray("Owner", "Healthbar", "Damagebar", "damageTimer")]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("8_nw10w")
+Owner = NodePath("../../..")
+Healthbar = NodePath("HealthBar")
+Damagebar = NodePath("DamageBar")
+damageTimer = NodePath("Damage Timer")
+metadata/_edit_use_anchors_ = true
+
+[node name="DamageBar" type="TextureProgressBar" parent="UI+Options/UI/Healthbar"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 8.0
+offset_top = 4.0
+offset_right = 56.0
+offset_bottom = 20.0
+value = 50.0
+texture_under = ExtResource("9_0ibnf")
+texture_over = ExtResource("10_06qlw")
+texture_progress = ExtResource("11_nm0b4")
+metadata/_edit_use_anchors_ = true
+
+[node name="HealthBar" type="TextureProgressBar" parent="UI+Options/UI/Healthbar"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 8.0
+offset_top = 4.0
+offset_right = 152.0
+offset_bottom = 20.0
+texture_over = ExtResource("10_06qlw")
+texture_progress = ExtResource("12_w3ow2")
+metadata/_edit_use_anchors_ = true
+
+[node name="Damage Timer" type="Timer" parent="UI+Options/UI/Healthbar"]
+wait_time = 1.5
+one_shot = true
+autostart = true
+
+[node name="Ragebar" type="Control" parent="UI+Options/UI" node_paths=PackedStringArray("Owner", "Ragebar", "Damagebar", "damageTimer")]
+anchors_preset = 0
+offset_top = -2.0
+offset_right = 40.0
+offset_bottom = 38.0
+script = ExtResource("13_riq4c")
+Owner = NodePath("../../..")
+Ragebar = NodePath("RageBar")
+Damagebar = NodePath("RageDamageBar2")
+damageTimer = NodePath("Rage Timer")
+metadata/_edit_use_anchors_ = true
+
+[node name="RageDamageBar2" type="TextureProgressBar" parent="UI+Options/UI/Ragebar"]
+texture_filter = 1
+offset_left = 8.33333
+offset_top = 15.3333
+offset_right = 56.3333
+offset_bottom = 31.3333
+value = 50.0
+texture_under = ExtResource("8_cmgtk")
+texture_over = ExtResource("15_55t0w")
+texture_progress = ExtResource("10_tmrn8")
+metadata/_edit_use_anchors_ = true
+
+[node name="RageBar" type="TextureProgressBar" parent="UI+Options/UI/Ragebar"]
+texture_filter = 1
+offset_left = 7.66667
+offset_top = 15.3333
+offset_right = 55.6667
+offset_bottom = 31.3333
+value = 50.0
+texture_over = ExtResource("15_55t0w")
+texture_progress = ExtResource("14_d4y12")
+metadata/_edit_use_anchors_ = true
+
+[node name="Rage Timer" type="Timer" parent="UI+Options/UI/Ragebar"]
+wait_time = 1.5
+one_shot = true
+autostart = true
+
+[node name="TextureRect" type="TextureRect" parent="UI+Options/UI"]
+texture_filter = 1
+layout_mode = 0
+offset_left = -9.33333
+offset_top = 6.66667
+offset_right = 14.6667
+offset_bottom = 26.6667
+texture = ExtResource("18_0lkxr")
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect2" type="TextureRect" parent="UI+Options/UI"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.216667
+anchor_top = 0.0833333
+anchor_right = 0.216667
+anchor_bottom = 0.0833334
+offset_left = -9.33333
+offset_top = 6.66667
+offset_right = 2.66667
+offset_bottom = 20.6667
+texture = ExtResource("19_cburk")
+metadata/_edit_use_anchors_ = true
 
 [connection signal="animation_finished" from="PlayerSprite" to="." method="_on_player_sprite_animation_finished"]
 [connection signal="timeout" from="Overflow" to="." method="_on_overflow_timeout"]
+[connection signal="timeout" from="RageTimer" to="." method="_on_rage_timer_timeout"]
 [connection signal="value_changed" from="UI+Options/Options/VBoxContainer2/SFX" to="UI+Options" method="_on_sfx_value_changed"]
 [connection signal="value_changed" from="UI+Options/Options/VBoxContainer2/Music" to="UI+Options" method="_on_music_value_changed"]
 [connection signal="toggled" from="UI+Options/Options/VBoxContainer2/Label3/CheckBox" to="UI+Options" method="_on_check_box_toggled"]
 [connection signal="pressed" from="UI+Options/Options/VBoxContainer2/Return" to="UI+Options" method="_on_return_pressed"]
+[connection signal="timeout" from="UI+Options/UI/Healthbar/Damage Timer" to="UI+Options/UI/Healthbar" method="_on_damage_timer_timeout"]
+[connection signal="timeout" from="UI+Options/UI/Ragebar/Rage Timer" to="UI+Options/UI/Ragebar" method="_on_rage_timer_timeout"]

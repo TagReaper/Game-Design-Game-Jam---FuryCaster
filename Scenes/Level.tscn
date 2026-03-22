@@ -142,6 +142,7 @@ rightLimitX = 1850
 position = Vector2(1179, -616)
 leftlimitX = 1000
 rightLimitX = 1200
+maxHealth = 50
 
 [node name="Slime5" parent="Enemies" instance=ExtResource("1_wxnq6")]
 position = Vector2(2644, -705)

@@ -42,4 +42,6 @@ func _on_area_entered(area: Area2D) -> void:
 		return
 	if !hostile:
 		get_parent().get_parent().rage += damage
+		get_parent().get_parent().rageTimer.start()
+		get_parent().get_parent().get_child(10).get_child(2).get_child(1)._rage_bar_change()
 	area._recieve_hit(damage, rage)

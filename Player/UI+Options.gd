@@ -27,14 +27,12 @@ func _on_check_box_toggled(toggled_on):
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 
-
 func _on_return_pressed():
 	get_tree().quit()
-
 
 func _on_sfx_value_changed(value):
 	Global.SFX_Volume = value
 
-
 func _on_music_value_changed(value):
 	Global.MUSIC_Volume = value
+

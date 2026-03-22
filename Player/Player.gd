@@ -8,6 +8,7 @@ class_name PlatformerController2D extends CharacterBody2D
 @export var DashCast: RayCast2D
 @export var SFX: AudioStreamPlayer2D
 @export var hurtbox: Hurtbox
+@export var rageTimer: Timer
 
 @export_category("Attacks")
 @export var slashHitbox: Shape2D
@@ -22,12 +23,12 @@ class_name PlatformerController2D extends CharacterBody2D
 @export_range(0,1) var friction: float = 1
 
 @export_category("Stats")
-@export var maxHealth: int = 50
-@export var maxRage: int = 100
+@export var maxHealth: int = 100
+@export var maxRage: float = 100
 
 #Intenal Variables
 var health: int = maxHealth
-var rage: int = 0
+var rage: float = 0
 var jumps: int = 0
 var dashes: int = 0
 var dashPositionX: int
@@ -37,6 +38,7 @@ var deathSFX = preload("res://Audio/SFX/Player Death SFX.mp3")
 var attackSFX = preload("res://Audio/SFX/Player Slash.mp3")
 var dashSFX = preload("res://Audio/SFX/Dash.mp3")
 var jumpSFX = preload("res://Audio/SFX/Jump.mp3")
+var overflowSFX = preload("res://Audio/SFX/Overflow.mp3")
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var volumeMax: float = SFX.volume_db
  
@@ -137,9 +139,17 @@ func _physics_process(delta):
 		pass
 	
 	#Overflow Check
-	if (rage > maxRage):
+	if (rage >= maxRage && currentState != State.DEAD):
+		if PlayerSprite.animation != "Overflow":
+			SFX.stream = overflowSFX
+			SFX.pitch_scale = randf_range(0.9, 1.1)
+			SFX.volume_db = -50 + Global.SFX_Volume * (2+50)
+			SFX.play()
+			OverflowTimer.start()
+			rageTimer.paused = true
+			health *= 0.5
+			$"UI+Options/UI/Healthbar"._health_bar_change()
 		currentState = State.OVERFLOW
-		health *= 0.75
 	else:
 		#Extra State Checks in order of priority
 		if (!is_on_floor() and canMove):
@@ -162,6 +172,10 @@ func _physics_process(delta):
 			currentState = State.DASH
 		"Death":
 			currentState = State.DEAD
+	
+	if rage > 0 && rageTimer.is_stopped():
+		rage -= 0.1
+		$"UI+Options/UI/Ragebar"._rage_bar_change()
 	
 	#flips the character
 	_check_flip()
@@ -222,5 +236,14 @@ func _on_player_sprite_animation_finished():
 func _on_overflow_timeout():
 	if currentState != State.DEAD:
 		rage = maxRage / 3
+		$"UI+Options/UI/Ragebar"._rage_bar_change()
+		rageTimer.paused = false
 		PlayerSprite.play("Idle")
 		currentState = State.IDLE
+
+
+func _on_rage_timer_timeout():
+	if rage >= 5:
+		rage -= 5
+	else:
+		rage = 0
