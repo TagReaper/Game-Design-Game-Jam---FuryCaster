@@ -8,5 +8,6 @@ script = ExtResource("1_dyvwq")
 SFX = NodePath("SFX")
 
 [node name="SFX" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
 stream = ExtResource("2_v8y3v")
 volume_db = -8.0

@@ -69,7 +69,7 @@ func _physics_process(delta):
 		match currentState:
 			State.ROAM:
 				if RoamTimer.is_stopped():
-					RoamTimer.start()
+					RoamTimer.start(randf_range(1,3))
 				_flip_check()
 				_move()
 			State.CHASE:
@@ -152,12 +152,12 @@ func _attack() -> void:
 func _flip_check() -> void:
 	if (moveTo-global_position.x > 0):
 		EnemySprite.flip_h = false
-		ledgeCast.position.x = 20
+		ledgeCast.position.x = 12
 		chaseDetect.position.x = 48
 		overlapCast.position.x = 6
 	elif (moveTo-global_position.x < 0):
 		EnemySprite.flip_h = true
-		ledgeCast.position.x = -20
+		ledgeCast.position.x = -12
 		chaseDetect.position.x = -48
 		overlapCast.position.x = -6
 

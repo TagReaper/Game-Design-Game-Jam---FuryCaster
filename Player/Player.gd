@@ -2,7 +2,6 @@ class_name PlatformerController2D extends CharacterBody2D
 
 @export_category("Reference Nodes")
 @export var PlayerSprite: AnimatedSprite2D
-@export var PlayerCollider: CollisionShape2D #Change to Hurtbox Soon
 @export var CooldownTimer: Timer
 @export var OverflowTimer: Timer
 @export var HitboxSpawn: Node2D
@@ -52,6 +51,8 @@ var canAttack: bool = true
 var canDash: bool = true
 
 func _physics_process(delta):
+	$Music.volume_db = -50 + Global.SFX_Volume * (-15+50)
+	
 	#Able Checks
 	if (is_on_floor()):
 		jumps = 0
@@ -104,7 +105,6 @@ func _physics_process(delta):
 	if (Input.is_action_just_pressed("dash") and canDash):
 		#Animation + Colliders + Increment
 		PlayerSprite.play("Dash")
-		PlayerCollider.disabled = true
 		SFX.stream = dashSFX
 		SFX.pitch_scale = randf_range(0.95, 1.05)
 		SFX.volume_db = -50 + Global.SFX_Volume * (-18+50)
@@ -218,7 +218,6 @@ func _on_player_sprite_animation_finished():
 			currentState = State.IDLE
 		"Dash":
 			hurtbox.monitorable = true
-			PlayerCollider.disabled = false
 			PlayerSprite.play("Idle")
 			currentState = State.IDLE
 
