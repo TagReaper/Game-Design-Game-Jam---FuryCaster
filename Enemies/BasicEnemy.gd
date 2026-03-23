@@ -23,8 +23,8 @@ extends CharacterBody2D
 @export_category("Movement Stats")
 @export var speed: float = 10
 @export_range(0,1) var friction: float = 0.8
-@export var leftlimitX: int
-@export var rightLimitX: int
+@export var leftlimitX: int = -10000
+@export var rightLimitX: int = 10000
 @export var chaseRange: int
 
 @export_category("Stats")
