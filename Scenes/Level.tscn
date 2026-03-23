@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://1qmdaiam8n6w"]
+[gd_scene load_steps=15 format=3 uid="uid://1qmdaiam8n6w"]
 
 [ext_resource type="Texture2D" uid="uid://cpkghdshpwoov" path="res://Environment/Paralax BG/platformer_background/sky_layer_0-modified.png" id="1_3vyip"]
 [ext_resource type="PackedScene" uid="uid://baa24aebxt3ub" path="res://Scenes/pause_controller.tscn" id="1_08ah2"]
@@ -9,7 +9,11 @@
 [ext_resource type="Texture2D" uid="uid://dgpda8opjh6yh" path="res://Environment/Paralax BG/platformer_background/sky_layer_2.png" id="3_cjam1"]
 [ext_resource type="Texture2D" uid="uid://db3411y52nudw" path="res://Environment/Paralax BG/platformer_background/sky_layer_3-modified.png" id="4_rkknr"]
 [ext_resource type="Texture2D" uid="uid://o5qlt4s8kpf0" path="res://Environment/Paralax BG/platformer_background/light_ray_L.png" id="5_fdfiy"]
+[ext_resource type="PackedScene" uid="uid://dtgyk7x2qppiu" path="res://Enemies/Golems/Orange/orange_golem.tscn" id="8_3s8ln"]
 [ext_resource type="PackedScene" uid="uid://croq6dj5yo61t" path="res://Enemies/King/king.tscn" id="8_o47wa"]
+[ext_resource type="PackedScene" uid="uid://luk4mrpgha1r" path="res://Enemies/Slime/slime.tscn" id="9_6qwxv"]
+[ext_resource type="PackedScene" uid="uid://cswxvw3d6q3xj" path="res://Enemies/Golems/Blue/BlueGolem.tscn" id="10_7f8w8"]
+[ext_resource type="PackedScene" uid="uid://d0up558b7wduh" path="res://Enemies/NightBorne/nightborne.tscn" id="14_vfp1r"]
 
 [node name="Level" type="Node2D"]
 
@@ -128,6 +132,81 @@ position = Vector2(4292, -2711)
 leftlimitX = 4200
 rightLimitX = 4800
 
+[node name="Slime" parent="Enemies" instance=ExtResource("9_6qwxv")]
+position = Vector2(414, -364)
+leftlimitX = 300
+rightLimitX = 500
+
+[node name="Slime2" parent="Enemies" instance=ExtResource("9_6qwxv")]
+position = Vector2(1101, -545)
+leftlimitX = 1000
+rightLimitX = 1200
+
+[node name="Slime3" parent="Enemies" instance=ExtResource("9_6qwxv")]
+position = Vector2(1662, -422)
+leftlimitX = 1600
+rightLimitX = 1800
+
+[node name="Slime4" parent="Enemies" instance=ExtResource("9_6qwxv")]
+position = Vector2(1965, -478)
+leftlimitX = 1900
+rightLimitX = 2050
+
+[node name="Slime5" parent="Enemies" instance=ExtResource("9_6qwxv")]
+position = Vector2(2658, -714)
+leftlimitX = 2550
+rightLimitX = 2750
+
+[node name="Slime6" parent="Enemies" instance=ExtResource("9_6qwxv")]
+position = Vector2(2841, -672)
+leftlimitX = 2800
+rightLimitX = 2900
+
+[node name="Blue Golem" parent="Enemies" instance=ExtResource("10_7f8w8")]
+position = Vector2(4346, -2290)
+
+[node name="Blue Golem2" parent="Enemies" instance=ExtResource("10_7f8w8")]
+position = Vector2(4156, -2316)
+
+[node name="Blue Golem3" parent="Enemies" instance=ExtResource("10_7f8w8")]
+position = Vector2(3270, -1948)
+
+[node name="Blue Golem4" parent="Enemies" instance=ExtResource("10_7f8w8")]
+position = Vector2(3758, -1240)
+
+[node name="Blue Golem5" parent="Enemies" instance=ExtResource("10_7f8w8")]
+position = Vector2(4017, -1254)
+
+[node name="Orange Golem" parent="Enemies" instance=ExtResource("8_3s8ln")]
+position = Vector2(3676, -1246)
+
+[node name="Orange Golem2" parent="Enemies" instance=ExtResource("8_3s8ln")]
+position = Vector2(4346, -2396)
+
+[node name="Orange Golem3" parent="Enemies" instance=ExtResource("8_3s8ln")]
+position = Vector2(4591, -2335)
+
+[node name="Orange Golem4" parent="Enemies" instance=ExtResource("8_3s8ln")]
+position = Vector2(3505, -1974)
+
+[node name="Orange Golem5" parent="Enemies" instance=ExtResource("8_3s8ln")]
+position = Vector2(3382, -2055)
+
+[node name="Orange Golem6" parent="Enemies" instance=ExtResource("8_3s8ln")]
+position = Vector2(1762, -555)
+
+[node name="Slime7" parent="Enemies" instance=ExtResource("9_6qwxv")]
+position = Vector2(3499, -1225)
+
+[node name="Slime8" parent="Enemies" instance=ExtResource("9_6qwxv")]
+position = Vector2(4169, -1314)
+
+[node name="Slime9" parent="Enemies" instance=ExtResource("9_6qwxv")]
+position = Vector2(4769, -2377)
+
+[node name="Slime10" parent="Enemies" instance=ExtResource("9_6qwxv")]
+position = Vector2(3489, -2657)
+
 [node name="Player" parent="." instance=ExtResource("1_80dxn")]
 position = Vector2(-296, -552)
 
@@ -148,3 +227,6 @@ texture_filter = 1
 tile_set = ExtResource("1_qvrhe")
 format = 2
 layer_0/tile_data = PackedInt32Array(-262150, 1, 0, -196614, 1, 1, -131078, 1, 2, -917486, 1, 0, -851950, 1, 1, -786414, 1, 2, -1048530, 1, 0, -982994, 1, 1, -917458, 1, 2, -1048514, 1, 0, -982978, 1, 1, -917442, 1, 2, -1572784, 1, 0, -1507248, 1, 1, -1441712, 1, 2, -2490260, 1, 0, -2424724, 1, 1, -2359188, 1, 2, -2686848, 1, 0, -2621312, 1, 1, -2555776, 1, 2, -3735398, 1, 0, -3669862, 1, 1, -3604326, 1, 2, -4128609, 1, 0, -4063073, 1, 1, -3997537, 1, 2, -4783976, 1, 0, -4718440, 1, 1, -4652904, 1, 2, -4783989, 1, 0, -4718453, 1, 1, -4652917, 393217, 2, -4784002, 1, 0, -4718466, 1, 1, -4652930, 1, 2, -4456331, 1, 0, -4390795, 1, 1, -4325259, 1, 2, -3997590, 1, 0, -3932054, 1, 1, -3866518, 1, 2, -5308312, 1, 0, -5242776, 1, 1, -5177240, 1, 2, -5504906, 1, 0, -5439370, 1, 1, -5373834, 1, 2, -5635970, 1, 0, -5570434, 1, 1, -5504898, 1, 2, -131080, 262145, 1, -131079, 196609, 2, -131075, 196609, 0, -131074, 196609, 1, -196609, 262145, 2, -720887, 131073, 0, -720884, 65537, 0, -720880, 327681, 1, -1114078, 393217, 2, -1114076, 65537, 1, -1114072, 262145, 2, -1048533, 65537, 2, -982996, 327681, 2, -982995, 393217, 1, -851914, 393217, 0, -851911, 393217, 2, -1114043, 262145, 1, -1310644, 65537, 2, -1441710, 196609, 1, -1376167, 327681, 0, -1376166, 262145, 1, -1376165, 196609, 1, -1310624, 196609, 2, -2293657, 65537, 1, -2424718, 393217, 1, -2424715, 393217, 0, -2424713, 65537, 0, -2424712, 196609, 0, -2490245, 131073, 0, -2490243, 327681, 0, -2555773, 196609, 1, -2555775, 262145, 0, -2359185, 393217, 2, -2359187, 393217, 2, -2359189, 262145, 2, -2752377, 262145, 0, -2883446, 65537, 2, -3211118, 131073, 0, -3407721, 327681, 2, -3473256, 196609, 0, -3407722, 131073, 0, -3014514, 196609, 2, -2948980, 393217, 2, -2817910, 262145, 0, -4652910, 131073, 1, -4652912, 196609, 2, -4652914, 393217, 2, -4652916, 327681, 2, -4652919, 327681, 0, -4652924, 393217, 2, -4652931, 262145, 0, -4652932, 196609, 0, -4652933, 327681, 0, -3866509, 131073, 1, -3866511, 327681, 0, -3866516, 262145, 0, -3866524, 65537, 2, -5177241, 65537, 1, -5242769, 131073, 2, -5242768, 393217, 1, -5242767, 262145, 2, -5373833, 393217, 2, -5439366, 65537, 2, -5504897, 327681, 0, -5570431, 196609, 0)
+
+[node name="Nightborne" parent="." instance=ExtResource("14_vfp1r")]
+position = Vector2(-216, -190)
