@@ -106,6 +106,7 @@ rageTimer = NodePath("RageTimer")
 MagicCooldown = NodePath("MagicCooldown")
 MagicCheck = NodePath("Area2D")
 slashHitbox = SubResource("CapsuleShape2D_fyjlv")
+slashDamage = 3
 speed = 6.0
 jumpPower = 11.0
 friction = 0.8

@@ -18,6 +18,7 @@ extends CharacterBody2D
 @export var attackRange: int
 @export var hitboxDelay: float
 @export var hitboxLifetime: float
+@export var hitboxOffset: Vector2
 
 @export_category("Movement Stats")
 @export var speed: float = 10
@@ -140,8 +141,10 @@ func _attack() -> void:
 				var hitbox = Hitbox.new(attackDamage, rage, hitboxLifetime, attackHitbox, true)
 				HitboxSpawn.add_child(hitbox)
 				var hitbox2 = Hitbox.new(0, rage, hitboxLifetime, attackHitbox, true)
+				hitbox.global_position = hitbox.global_position + hitboxOffset
 				hitbox2.scale *= 3
 				HitboxSpawn.add_child(hitbox2)
+				hitbox2.global_position = hitbox2.global_position + hitboxOffset
 				
 				CooldownTimer.start()
 		#"OTHER ATTACK":
@@ -152,13 +155,17 @@ func _attack() -> void:
 
 func _flip_check() -> void:
 	if (moveTo-global_position.x > 0):
+		if EnemySprite.flip_h:
+			hitboxOffset.x = -hitboxOffset.x
 		EnemySprite.flip_h = false
-		ledgeCast.position.x = 12
+		ledgeCast.position.x = 16
 		chaseDetect.position.x = 48
 		overlapCast.position.x = 6
 	elif (moveTo-global_position.x < 0):
+		if !EnemySprite.flip_h:
+			hitboxOffset.x = -hitboxOffset.x
 		EnemySprite.flip_h = true
-		ledgeCast.position.x = -12
+		ledgeCast.position.x = -16
 		chaseDetect.position.x = -48
 		overlapCast.position.x = -6
 

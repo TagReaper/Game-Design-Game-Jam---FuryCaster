@@ -1,7 +1,8 @@
-[gd_resource type="SpriteFrames" load_steps=28 format=3 uid="uid://bc1r7yb6j6j6d"]
+[gd_resource type="SpriteFrames" load_steps=39 format=3 uid="uid://bc1r7yb6j6j6d"]
 
 [ext_resource type="Texture2D" uid="uid://dglbuu6fihfkp" path="res://VFX/Fire-bomb.png" id="1_ol1lu"]
 [ext_resource type="Texture2D" uid="uid://c53ims26hy5st" path="res://VFX/Dark-Bolt.png" id="1_pcd1c"]
+[ext_resource type="Texture2D" uid="uid://bq73oij36pgw5" path="res://VFX/Lightning.png" id="3_3w7ao"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kmuln"]
 atlas = ExtResource("1_pcd1c")
@@ -103,6 +104,46 @@ region = Rect2(832, 0, 64, 64)
 atlas = ExtResource("1_ol1lu")
 region = Rect2(768, 0, 64, 64)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_hfkfb"]
+atlas = ExtResource("3_3w7ao")
+region = Rect2(0, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0x60b"]
+atlas = ExtResource("3_3w7ao")
+region = Rect2(64, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ppdvo"]
+atlas = ExtResource("3_3w7ao")
+region = Rect2(128, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_810ok"]
+atlas = ExtResource("3_3w7ao")
+region = Rect2(192, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iq23i"]
+atlas = ExtResource("3_3w7ao")
+region = Rect2(256, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_puo7a"]
+atlas = ExtResource("3_3w7ao")
+region = Rect2(320, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wdjil"]
+atlas = ExtResource("3_3w7ao")
+region = Rect2(384, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qig8k"]
+atlas = ExtResource("3_3w7ao")
+region = Rect2(448, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v41n0"]
+atlas = ExtResource("3_3w7ao")
+region = Rect2(512, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a56al"]
+atlas = ExtResource("3_3w7ao")
+region = Rect2(576, 0, 64, 128)
+
 [resource]
 animations = [{
 "frames": [{
@@ -196,7 +237,40 @@ animations = [{
 "name": &"Explosion",
 "speed": 16.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hfkfb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0x60b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ppdvo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_810ok")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iq23i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_puo7a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wdjil")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qig8k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v41n0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a56al")
+}, {
+"duration": 1.0,
+"texture": null
+}],
 "loop": false,
 "name": &"Lightning",
 "speed": 16.0
