@@ -5,9 +5,9 @@
 [ext_resource type="Texture2D" uid="uid://c5avqk85hsjhc" path="res://Enemies/King/spr_KingGroundAttack_strip_no_bkg.png" id="2_u2flk"]
 [ext_resource type="Texture2D" uid="uid://dowhpirmwxo4p" path="res://Enemies/King/spr_King2Combo_strip_no_bkg.png" id="3_kc6an"]
 [ext_resource type="Texture2D" uid="uid://cls7e0cllh2gy" path="res://Enemies/King/spr_KingDeath_strip_no_bkg.png" id="3_qujfi"]
-[ext_resource type="AudioStream" uid="uid://4hn2fgy7cbsm" path="res://Audio/SFX/Golem Smash.mp3" id="3_wpinj"]
 [ext_resource type="Texture2D" uid="uid://cxjj6usb21mfm" path="res://Enemies/King/spr_KingWalk_strip_no_bkg.png" id="4_4ea2g"]
 [ext_resource type="PackedScene" uid="uid://d0fb8cd3qt8qx" path="res://Components/hurtbox.tscn" id="4_6eyiq"]
+[ext_resource type="AudioStream" uid="uid://bqh17akwj5yuf" path="res://Audio/SFX/audiomass-output.mp3" id="7_6b3u5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ayerr"]
 radius = 21.0238
@@ -1188,8 +1188,8 @@ position = Vector2(0, -5)
 
 [node name="SFX" type="AudioStreamPlayer2D" parent="."]
 process_mode = 3
-stream = ExtResource("3_wpinj")
-volume_db = -8.0
+stream = ExtResource("7_6b3u5")
+volume_db = -12.0
 
 [node name="Hurtbox" parent="." instance=ExtResource("4_6eyiq")]
 owner_hostile = true

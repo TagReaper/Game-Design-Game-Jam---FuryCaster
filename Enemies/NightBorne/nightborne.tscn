@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Enemies/BasicEnemy.gd" id="1_t0s3v"]
 [ext_resource type="Texture2D" uid="uid://dxppe1h61mucj" path="res://Enemies/NightBorne/NightBorne.png" id="2_78cof"]
-[ext_resource type="AudioStream" uid="uid://4hn2fgy7cbsm" path="res://Audio/SFX/Golem Smash.mp3" id="3_ib2wa"]
+[ext_resource type="AudioStream" uid="uid://1k8ms2reg6y7" path="res://Audio/SFX/audiomass-output (2).mp3" id="3_pbgcv"]
 [ext_resource type="PackedScene" uid="uid://d0fb8cd3qt8qx" path="res://Components/hurtbox.tscn" id="4_tym1j"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0sxfq"]
@@ -463,8 +463,8 @@ position = Vector2(0, -5)
 
 [node name="SFX" type="AudioStreamPlayer2D" parent="."]
 process_mode = 3
-stream = ExtResource("3_ib2wa")
-volume_db = -8.0
+stream = ExtResource("3_pbgcv")
+volume_db = -2.0
 
 [node name="Hurtbox" parent="." instance=ExtResource("4_tym1j")]
 owner_hostile = true
