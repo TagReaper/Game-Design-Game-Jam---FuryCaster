@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b4jjbqe3fsdgv"
-path="res://.godot/imported/Heart_Arrow_Button.png-36a89bac4d72d5d5c20396c3cf0d0510.ctex"
+uid="uid://bphbokiwehha6"
+path="res://.godot/imported/pixil-frame-0 (7).png-1e8d6da9ba22dbcadecf245a73350970.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/Heart_Arrow_Button.png"
-dest_files=["res://.godot/imported/Heart_Arrow_Button.png-36a89bac4d72d5d5c20396c3cf0d0510.ctex"]
+source_file="res://UI/pixil-frame-0 (7).png"
+dest_files=["res://.godot/imported/pixil-frame-0 (7).png-1e8d6da9ba22dbcadecf245a73350970.ctex"]
 
 [params]
 

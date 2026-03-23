@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/WF_Scientific-Ambience.mp3-4341ac38da23444a53
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0

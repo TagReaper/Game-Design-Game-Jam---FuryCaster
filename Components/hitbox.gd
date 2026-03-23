@@ -1,10 +1,10 @@
 class_name Hitbox extends Area2D
 
-var damage: int
-var lifetime: float
-var shape: Shape2D
-var hostile: bool
-var rage: int
+@export var damage: int
+@export var lifetime: float
+@export var shape: Shape2D
+@export var hostile: bool
+@export var rage: int
 #note: Hitbox logging
 
 func _init(_damage: int, _rage: int, _lifetime: float, _shape: Shape2D, _hostile: bool) -> void:
@@ -40,6 +40,8 @@ func _ready() -> void:
 func _on_area_entered(area: Area2D) -> void:
 	if not area.has_method("_recieve_hit"):
 		return
-	if !hostile:
+	if !hostile and get_parent().get_parent().name == "Player":
 		get_parent().get_parent().rage += damage
+		get_parent().get_parent().rageTimer.start()
+		get_parent().get_parent().get_child(12).get_child(2).get_child(1)._rage_bar_change()
 	area._recieve_hit(damage, rage)

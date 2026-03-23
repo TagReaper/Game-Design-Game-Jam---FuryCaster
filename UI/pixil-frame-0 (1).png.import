@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://djfkvtb21pgvy"
-path="res://.godot/imported/Cursor_Bars_Loading.png-3fd425b70ee0143bafd0b525ed6a49a1.ctex"
+uid="uid://b34upkivta5jo"
+path="res://.godot/imported/pixil-frame-0 (1).png-0aa75663a21d1c7e7aacacd8d1aa74b2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/Cursor_Bars_Loading.png"
-dest_files=["res://.godot/imported/Cursor_Bars_Loading.png-3fd425b70ee0143bafd0b525ed6a49a1.ctex"]
+source_file="res://UI/pixil-frame-0 (1).png"
+dest_files=["res://.godot/imported/pixil-frame-0 (1).png-0aa75663a21d1c7e7aacacd8d1aa74b2.ctex"]
 
 [params]
 
