@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bsk7fvq3tymy8"
-path="res://.godot/imported/ManyBars.png-0b53dca067b3627889cbb9544f806d45.ctex"
+uid="uid://1l6nh5c2egkn"
+path="res://.godot/imported/Pointers.png-a2a61c5ae1abba256df2d4b6ac59fda6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/ManyBars.png"
-dest_files=["res://.godot/imported/ManyBars.png-0b53dca067b3627889cbb9544f806d45.ctex"]
+source_file="res://UI/Pointers.png"
+dest_files=["res://.godot/imported/Pointers.png-a2a61c5ae1abba256df2d4b6ac59fda6.ctex"]
 
 [params]
 

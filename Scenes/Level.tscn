@@ -155,7 +155,7 @@ leftlimitX = 3140
 rightLimitX = 3165
 
 [node name="Player" parent="." instance=ExtResource("1_80dxn")]
-position = Vector2(-124, -121)
+position = Vector2(973, -720)
 slashDamage = 3
 
 [node name="Ground" type="Node" parent="."]

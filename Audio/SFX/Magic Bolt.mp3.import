@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://3ffmm3d0h8l3"
+path="res://.godot/imported/Magic Bolt.mp3-694a79b5f77e8ae6d5ae9b14a1d45c30.mp3str"
+
+[deps]
+
+source_file="res://Audio/SFX/Magic Bolt.mp3"
+dest_files=["res://.godot/imported/Magic Bolt.mp3-694a79b5f77e8ae6d5ae9b14a1d45c30.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

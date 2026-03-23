@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://crivg37iaxi26"]
+[gd_scene load_steps=36 format=3 uid="uid://crivg37iaxi26"]
 
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_exxqv"]
 [ext_resource type="SpriteFrames" uid="uid://brqumy5qx2ufx" path="res://Player/PlayerSpriteFrames.tres" id="1_sxu62"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://bug67uxkl5lk7" path="res://UI/pixil-frame-0 (4).png" id="15_55t0w"]
 [ext_resource type="Texture2D" uid="uid://dgw8ll05ui6e4" path="res://UI/pixil-frame-0 (11).png" id="18_0lkxr"]
 [ext_resource type="Texture2D" uid="uid://brxhch1rpvyoj" path="res://UI/pixil-frame-0 (10).png" id="19_cburk"]
+[ext_resource type="Texture2D" uid="uid://1l6nh5c2egkn" path="res://UI/Pointers.png" id="20_khxmp"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fyjlv"]
 
@@ -88,7 +89,10 @@ shadow_offset = Vector2(0, 5)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kfjek"]
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("PlayerSprite", "CooldownTimer", "OverflowTimer", "HitboxSpawn", "DashCast", "SFX", "hurtbox", "rageTimer") groups=["Player"]]
+[sub_resource type="CircleShape2D" id="CircleShape2D_20lav"]
+radius = 4.0
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("PlayerSprite", "CooldownTimer", "OverflowTimer", "HitboxSpawn", "DashCast", "SFX", "hurtbox", "rageTimer", "MagicCooldown", "MagicCheck") groups=["Player"]]
 collision_mask = 2
 script = ExtResource("1_exxqv")
 PlayerSprite = NodePath("PlayerSprite")
@@ -99,6 +103,8 @@ DashCast = NodePath("DashCast")
 SFX = NodePath("SFX")
 hurtbox = NodePath("Hurtbox")
 rageTimer = NodePath("RageTimer")
+MagicCooldown = NodePath("MagicCooldown")
+MagicCheck = NodePath("Area2D")
 slashHitbox = SubResource("CapsuleShape2D_fyjlv")
 speed = 6.0
 jumpPower = 11.0
@@ -122,6 +128,10 @@ frame_progress = 0.603212
 position = Vector2(0, 2)
 shape = SubResource("CapsuleShape2D_ehols")
 
+[node name="MagicCooldown" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
 [node name="Cooldown" type="Timer" parent="."]
 wait_time = 0.3
 one_shot = true
@@ -135,7 +145,12 @@ wait_time = 3.0
 one_shot = true
 
 [node name="Hitbox Spawn" type="Node2D" parent="."]
+texture_filter = 1
 position = Vector2(8, 0)
+
+[node name="Magic Spawn" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Magic Spawn"]
 
 [node name="DashCast" type="RayCast2D" parent="."]
 position = Vector2(0, 11)
@@ -413,6 +428,21 @@ offset_bottom = 20.6667
 texture = ExtResource("19_cburk")
 metadata/_edit_use_anchors_ = true
 
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_20lav")
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+z_index = 100
+texture_filter = 1
+texture = ExtResource("20_khxmp")
+hframes = 4
+frame = 1
+
 [connection signal="animation_finished" from="PlayerSprite" to="." method="_on_player_sprite_animation_finished"]
 [connection signal="timeout" from="Overflow" to="." method="_on_overflow_timeout"]
 [connection signal="timeout" from="RageTimer" to="." method="_on_rage_timer_timeout"]
@@ -422,3 +452,5 @@ metadata/_edit_use_anchors_ = true
 [connection signal="pressed" from="UI+Options/Options/VBoxContainer2/Return" to="UI+Options" method="_on_return_pressed"]
 [connection signal="timeout" from="UI+Options/UI/Healthbar/Damage Timer" to="UI+Options/UI/Healthbar" method="_on_damage_timer_timeout"]
 [connection signal="timeout" from="UI+Options/UI/Ragebar/Rage Timer" to="UI+Options/UI/Ragebar" method="_on_rage_timer_timeout"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

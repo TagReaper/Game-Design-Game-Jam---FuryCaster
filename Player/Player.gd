@@ -9,6 +9,9 @@ class_name PlatformerController2D extends CharacterBody2D
 @export var SFX: AudioStreamPlayer2D
 @export var hurtbox: Hurtbox
 @export var rageTimer: Timer
+@export var MagicCooldown: Timer
+@export var MagicCheck: Area2D
+
 
 @export_category("Attacks")
 @export var slashHitbox: Shape2D
@@ -39,7 +42,9 @@ var attackSFX = preload("res://Audio/SFX/Player Slash.mp3")
 var dashSFX = preload("res://Audio/SFX/Dash.mp3")
 var jumpSFX = preload("res://Audio/SFX/Jump.mp3")
 var overflowSFX = preload("res://Audio/SFX/Overflow.mp3")
+var magicSpell = load("res://Player/magic.tscn")
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+var magicColliding = false
 @onready var volumeMax: float = SFX.volume_db
  
 #State Handler
@@ -51,8 +56,12 @@ var canMove: bool = true
 var canJump: bool = true
 var canAttack: bool = true
 var canDash: bool = true
+var canCast: bool = true
 
 func _physics_process(delta):
+	#Magic on Mouse
+	MagicCheck.global_position = get_global_mouse_position()
+	
 	#Able Checks
 	if (is_on_floor()):
 		jumps = 0
@@ -62,6 +71,7 @@ func _physics_process(delta):
 	if (currentState != State.OVERFLOW and currentState != State.DASH and currentState != State.DEAD):
 		if (currentState != State.ATTACK):
 			canAttack = CooldownTimer.is_stopped()
+			canCast = MagicCooldown.is_stopped() && magicColliding
 			canJump = is_on_floor() or jumps < maxJumps
 			canDash = dashes < maxDashes
 		else:
@@ -135,8 +145,15 @@ func _physics_process(delta):
 		HitboxSpawn.add_child(hitbox)
 	
 	#Cast Spell
-	if (Input.is_action_just_pressed("castSpell") and canAttack):
-		pass
+	if (Input.is_action_just_pressed("castSpell") and canCast):
+		if rage >= 10:
+			rage -= 10
+			var spell = magicSpell.instantiate()
+			get_parent().add_child(spell)
+			spell.type = "Darkbolt"
+			spell.global_position = MagicCheck.global_position
+			spell.cast()
+			MagicCooldown.start()
 	
 	#Overflow Check
 	if (rage >= maxRage && currentState != State.DEAD):
@@ -214,11 +231,11 @@ func _check_animation() -> void:
 				PlayerSprite.play("Death")
 
 func _check_flip() -> void:
-	if velocity.x > 0.1: #Facing Right
+	if (velocity.x > 0.1 and currentState != State.ATTACK) or (currentState == State.ATTACK and get_global_mouse_position().x > global_position.x): #Facing Right
 		PlayerSprite.flip_h = false
 		HitboxSpawn.position.x = 8
 		DashCast.target_position.x = 128
-	elif velocity.x < -0.1: # Facing Left
+	elif (velocity.x < -0.1 and currentState != State.ATTACK) or (currentState == State.ATTACK and get_global_mouse_position().x < global_position.x): # Facing Left
 		PlayerSprite.flip_h = true
 		HitboxSpawn.position.x = -8
 		DashCast.target_position.x = -128
@@ -247,3 +264,13 @@ func _on_rage_timer_timeout():
 		rage -= 5
 	else:
 		rage = 0
+
+
+func _on_area_2d_body_entered(body):
+	magicColliding = true
+	MagicCheck.get_child(1).frame = 0
+
+
+func _on_area_2d_body_exited(body):
+	magicColliding = false
+	MagicCheck.get_child(1).frame = 1
