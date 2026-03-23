@@ -23,6 +23,7 @@ This project is for CSE-4453, Game Jam Project
 * u_xjrmmgxfru
 * Universfield
 * KoiRoylers
+* RescopicSound
 
 ## Requirements:
 * Made with Godot 4
