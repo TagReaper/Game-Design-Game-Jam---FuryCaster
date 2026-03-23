@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://k312fmy7t7ac"
+path="res://.godot/imported/audiomass-output (1).mp3-7d9c68b44d5a3858f8fcdc197a646319.mp3str"
+
+[deps]
+
+source_file="res://Audio/SFX/audiomass-output (1).mp3"
+dest_files=["res://.godot/imported/audiomass-output (1).mp3-7d9c68b44d5a3858f8fcdc197a646319.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
