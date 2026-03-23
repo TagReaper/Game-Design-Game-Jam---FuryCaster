@@ -36,12 +36,13 @@ Itch.io link: https://tagreaper.itch.io/fury-caster
 * 1 Boss, Possible mini-boss(es)
 * Sidescroller platformer style
 * Magic and Melee Attacks
-* Flying, Magic, Ranged, Summoning, and Melee Enemies
+* ~~Flying~~, Magic, ~~Ranged~~, ~~Summoning~~, and Melee Enemies
 * Singleplayer
 ### Asset Tools
 * Pixilart.com (for non-credited art)
 ### Sound Design Tools
 * JSFXR (for non-credited SFX)
 * https://audiotrimmer.com
+* https://audiomass.co
 ### Music
 * Music by WaterFlame | https://waterflame.newgrounds.com/audio
