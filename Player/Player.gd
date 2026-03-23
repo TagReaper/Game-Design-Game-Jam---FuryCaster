@@ -148,6 +148,7 @@ func _physics_process(delta):
 	if (Input.is_action_just_pressed("castSpell") and canCast):
 		if rage >= 10:
 			rage -= 10
+			$"UI+Options/UI/Ragebar"._rage_bar_change()
 			var spell = magicSpell.instantiate()
 			get_parent().add_child(spell)
 			spell.type = "Darkbolt"
