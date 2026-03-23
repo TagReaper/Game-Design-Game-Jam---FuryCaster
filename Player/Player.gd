@@ -164,18 +164,21 @@ func _physics_process(delta):
 			SFX.volume_db = -50 + Global.SFX_Volume * (-10+50)
 			SFX.play()
 			PlayerSprite.play("Death")
+			await get_tree().create_timer(5).timeout
+			SceneLoader.load_scene("res://Scenes/main_menu.tscn")
 		currentState = State.DEAD
 	
 	#Overflow Check
 	if (rage >= maxRage and currentState != State.DEAD and PlayerSprite.animation != "Death"):
 		if PlayerSprite.animation != "Overflow":
+			PlayerSprite.play("Overflow")
 			SFX.stream = overflowSFX
 			SFX.pitch_scale = randf_range(0.9, 1.1)
 			SFX.volume_db = -50 + Global.SFX_Volume * (2+50)
 			SFX.play()
 			OverflowTimer.start()
 			rageTimer.paused = true
-			health -= 20
+			health * 0.7
 			$"UI+Options/UI/Healthbar"._health_bar_change()
 		currentState = State.OVERFLOW
 	else:

@@ -1,16 +1,15 @@
-[gd_scene load_steps=12 format=3 uid="uid://1qmdaiam8n6w"]
+[gd_scene load_steps=11 format=3 uid="uid://1qmdaiam8n6w"]
 
 [ext_resource type="Texture2D" uid="uid://cpkghdshpwoov" path="res://Environment/Paralax BG/platformer_background/sky_layer_0-modified.png" id="1_3vyip"]
 [ext_resource type="PackedScene" uid="uid://baa24aebxt3ub" path="res://Scenes/pause_controller.tscn" id="1_08ah2"]
 [ext_resource type="PackedScene" uid="uid://crivg37iaxi26" path="res://Player/player.tscn" id="1_80dxn"]
 [ext_resource type="TileSet" uid="uid://fgyq462s8nf7" path="res://Environment/TileMap.tres" id="1_jlgg8"]
 [ext_resource type="TileSet" uid="uid://dg43qjiuecjmu" path="res://Environment/Decoration.tres" id="1_qvrhe"]
-[ext_resource type="PackedScene" uid="uid://luk4mrpgha1r" path="res://Enemies/Slime/slime.tscn" id="1_wxnq6"]
 [ext_resource type="Texture2D" uid="uid://bho8mna2vyjqe" path="res://Environment/Paralax BG/platformer_background/sky_layer_1.png" id="2_uibg3"]
 [ext_resource type="Texture2D" uid="uid://dgpda8opjh6yh" path="res://Environment/Paralax BG/platformer_background/sky_layer_2.png" id="3_cjam1"]
 [ext_resource type="Texture2D" uid="uid://db3411y52nudw" path="res://Environment/Paralax BG/platformer_background/sky_layer_3-modified.png" id="4_rkknr"]
 [ext_resource type="Texture2D" uid="uid://o5qlt4s8kpf0" path="res://Environment/Paralax BG/platformer_background/light_ray_L.png" id="5_fdfiy"]
-[ext_resource type="PackedScene" uid="uid://cswxvw3d6q3xj" path="res://Enemies/Golems/Blue/BlueGolem.tscn" id="9_y8pi8"]
+[ext_resource type="PackedScene" uid="uid://dtgyk7x2qppiu" path="res://Enemies/Golems/Orange/orange_golem.tscn" id="8_3s8ln"]
 
 [node name="Level" type="Node2D"]
 
@@ -64,7 +63,7 @@ texture = ExtResource("3_cjam1")
 modulate = Color(0.803922, 0.819608, 0.913725, 1)
 texture_filter = 1
 position = Vector2(240, 140)
-motion_scale = Vector2(0.3, 0)
+motion_scale = Vector2(0, 0)
 motion_mirroring = Vector2(960, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4"]
@@ -124,57 +123,11 @@ layer_0/tile_data = PackedInt32Array(-327696, 2, 0, -262160, 2, 1, -196624, 2, 2
 
 [node name="Enemies" type="Node" parent="."]
 
-[node name="Slime" parent="Enemies" instance=ExtResource("1_wxnq6")]
-z_index = 1
-position = Vector2(431, -342)
-leftlimitX = 300
-rightLimitX = 510
-
-[node name="Slime2" parent="Enemies" instance=ExtResource("1_wxnq6")]
-z_index = 1
-position = Vector2(1240, -598)
-leftlimitX = 1000
-rightLimitX = 1250
-
-[node name="Slime3" parent="Enemies" instance=ExtResource("1_wxnq6")]
-z_index = 1
-position = Vector2(1671, -508)
-leftlimitX = 1550
-rightLimitX = 1850
-
-[node name="Slime4" parent="Enemies" instance=ExtResource("1_wxnq6")]
-z_index = 1
-position = Vector2(1033, -598)
-leftlimitX = 1000
-rightLimitX = 1200
-maxHealth = 50
-
-[node name="Slime5" parent="Enemies" instance=ExtResource("1_wxnq6")]
-z_index = 1
-position = Vector2(2644, -705)
-leftlimitX = 2550
-rightLimitX = 2750
-
-[node name="Slime6" parent="Enemies" instance=ExtResource("1_wxnq6")]
-z_index = 1
-position = Vector2(3154, -754)
-leftlimitX = 3140
-rightLimitX = 3165
-
-[node name="Blue Golem" parent="Enemies" instance=ExtResource("9_y8pi8")]
-z_index = 1
-position = Vector2(-299, -135)
-leftlimitX = -450
-rightLimitX = -150
-
-[node name="Blue Golem2" parent="Enemies" instance=ExtResource("9_y8pi8")]
-position = Vector2(139, -323)
-leftlimitX = 100
-rightLimitX = 150
+[node name="Orange Golem" parent="Enemies" instance=ExtResource("8_3s8ln")]
+position = Vector2(-279, -231)
 
 [node name="Player" parent="." instance=ExtResource("1_80dxn")]
-z_index = 2
-position = Vector2(973, -720)
+position = Vector2(-654, -768)
 
 [node name="Ground" type="Node" parent="."]
 

@@ -113,6 +113,8 @@ func _move() -> void:
 func _check_animation() -> void:
 	if currentState == State.ATTACK:
 		_attack()
+		if EnemySprite.animation == "Walk":
+			EnemySprite.play("Idle")
 	elif velocity.x != 0:
 		if EnemySprite.animation != "Walk":
 			EnemySprite.play("Walk")
