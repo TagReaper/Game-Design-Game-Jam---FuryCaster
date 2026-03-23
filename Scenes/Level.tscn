@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://1qmdaiam8n6w"]
+[gd_scene load_steps=16 format=3 uid="uid://1qmdaiam8n6w"]
 
 [ext_resource type="Texture2D" uid="uid://cpkghdshpwoov" path="res://Environment/Paralax BG/platformer_background/sky_layer_0-modified.png" id="1_3vyip"]
 [ext_resource type="PackedScene" uid="uid://baa24aebxt3ub" path="res://Scenes/pause_controller.tscn" id="1_08ah2"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://luk4mrpgha1r" path="res://Enemies/Slime/slime.tscn" id="9_6qwxv"]
 [ext_resource type="PackedScene" uid="uid://cswxvw3d6q3xj" path="res://Enemies/Golems/Blue/BlueGolem.tscn" id="10_7f8w8"]
 [ext_resource type="PackedScene" uid="uid://d0up558b7wduh" path="res://Enemies/NightBorne/nightborne.tscn" id="14_vfp1r"]
+[ext_resource type="FontFile" uid="uid://dmrqcor2emhro" path="res://UI/GrapeSoda.ttf" id="15_qntln"]
 
 [node name="Level" type="Node2D"]
 
@@ -204,6 +205,44 @@ position = Vector2(4769, -2377)
 [node name="Slime10" parent="Enemies" instance=ExtResource("9_6qwxv")]
 position = Vector2(3489, -2657)
 
+[node name="Nightborne" parent="Enemies" instance=ExtResource("14_vfp1r")]
+position = Vector2(3452, -1930)
+
+[node name="Nightborne2" parent="Enemies" instance=ExtResource("14_vfp1r")]
+position = Vector2(4527, -2372)
+
+[node name="Nightborne3" parent="Enemies" instance=ExtResource("14_vfp1r")]
+position = Vector2(4046, -2383)
+
+[node name="Nightborne4" parent="Enemies" instance=ExtResource("14_vfp1r")]
+position = Vector2(4588, -2817)
+
+[node name="Nightborne5" parent="Enemies" instance=ExtResource("14_vfp1r")]
+position = Vector2(4175, -2824)
+
+[node name="Slime11" parent="Enemies" instance=ExtResource("9_6qwxv")]
+position = Vector2(5788, -3232)
+
+[node name="Nightborne6" parent="Enemies" instance=ExtResource("14_vfp1r")]
+position = Vector2(6624, -3565)
+leftlimitX = 6695
+rightLimitX = 7500
+
+[node name="Nightborne7" parent="Enemies" instance=ExtResource("14_vfp1r")]
+position = Vector2(6468, -3489)
+leftlimitX = 6695
+rightLimitX = 7500
+
+[node name="Nightborne8" parent="Enemies" instance=ExtResource("14_vfp1r")]
+position = Vector2(6880, -3497)
+leftlimitX = 6695
+rightLimitX = 7500
+
+[node name="Nightborne9" parent="Enemies" instance=ExtResource("14_vfp1r")]
+position = Vector2(7107, -3494)
+leftlimitX = 6695
+rightLimitX = 7500
+
 [node name="Player" parent="." instance=ExtResource("1_80dxn")]
 position = Vector2(-296, -552)
 
@@ -225,40 +264,116 @@ tile_set = ExtResource("1_qvrhe")
 format = 2
 layer_0/tile_data = PackedInt32Array(-262150, 1, 0, -196614, 1, 1, -131078, 1, 2, -917486, 1, 0, -851950, 1, 1, -786414, 1, 2, -1048530, 1, 0, -982994, 1, 1, -917458, 1, 2, -1048514, 1, 0, -982978, 1, 1, -917442, 1, 2, -1572784, 1, 0, -1507248, 1, 1, -1441712, 1, 2, -2490260, 1, 0, -2424724, 1, 1, -2359188, 1, 2, -2686848, 1, 0, -2621312, 1, 1, -2555776, 1, 2, -3735398, 1, 0, -3669862, 1, 1, -3604326, 1, 2, -4128609, 1, 0, -4063073, 1, 1, -3997537, 1, 2, -4783976, 1, 0, -4718440, 1, 1, -4652904, 1, 2, -4783989, 1, 0, -4718453, 1, 1, -4652917, 393217, 2, -4784002, 1, 0, -4718466, 1, 1, -4652930, 1, 2, -4456331, 1, 0, -4390795, 1, 1, -4325259, 1, 2, -3997590, 1, 0, -3932054, 1, 1, -3866518, 1, 2, -5308312, 1, 0, -5242776, 1, 1, -5177240, 1, 2, -5504906, 1, 0, -5439370, 1, 1, -5373834, 1, 2, -5635970, 1, 0, -5570434, 1, 1, -5504898, 1, 2, -131080, 262145, 1, -131079, 196609, 2, -131075, 196609, 0, -131074, 196609, 1, -196609, 262145, 2, -720887, 131073, 0, -720884, 65537, 0, -720880, 327681, 1, -1114078, 393217, 2, -1114076, 65537, 1, -1114072, 262145, 2, -1048533, 65537, 2, -982996, 327681, 2, -982995, 393217, 1, -851914, 393217, 0, -851911, 393217, 2, -1114043, 262145, 1, -1310644, 65537, 2, -1441710, 196609, 1, -1376167, 327681, 0, -1376166, 262145, 1, -1376165, 196609, 1, -1310624, 196609, 2, -2293657, 65537, 1, -2424718, 393217, 1, -2424715, 393217, 0, -2424713, 65537, 0, -2424712, 196609, 0, -2490245, 131073, 0, -2490243, 327681, 0, -2555773, 196609, 1, -2555775, 262145, 0, -2359185, 393217, 2, -2359187, 393217, 2, -2359189, 262145, 2, -2752377, 262145, 0, -2883446, 65537, 2, -3211118, 131073, 0, -3407721, 327681, 2, -3473256, 196609, 0, -3407722, 131073, 0, -3014514, 196609, 2, -2948980, 393217, 2, -2817910, 262145, 0, -4652910, 131073, 1, -4652912, 196609, 2, -4652914, 393217, 2, -4652916, 327681, 2, -4652919, 327681, 0, -4652924, 393217, 2, -4652931, 262145, 0, -4652932, 196609, 0, -4652933, 327681, 0, -3866509, 131073, 1, -3866511, 327681, 0, -3866516, 262145, 0, -3866524, 65537, 2, -5177241, 65537, 1, -5242769, 131073, 2, -5242768, 393217, 1, -5242767, 262145, 2, -5373833, 393217, 2, -5439366, 65537, 2, -5504897, 327681, 0, -5570431, 196609, 0, -7012106, 65537, 2, -7012108, 262145, 2, -7012112, 262145, 2, -7012115, 262145, 2, -7012116, 393217, 2, -7012117, 393217, 1, -7012118, 196609, 0, -7012119, 196609, 1, -7012121, 327681, 1, -7012123, 262145, 1, -7012125, 196609, 1, -7012128, 262145, 0, -7012130, 327681, 2, -7012132, 262145, 0, -7012133, 131073, 2, -7012134, 131073, 2, -7012136, 65537, 2, -7012142, 262145, 1, -7012143, 262145, 2, -7012144, 196609, 2, -7012155, 196609, 1, -6946620, 393217, 2, -6881086, 262145, 1, -6815552, 262145, 0, -6618950, 131073, 2, -6553416, 65537, 2, -6553417, 327681, 1, -6553418, 65537, 1, -6553423, 262145, 1, -6487888, 196609, 1, -6422353, 262145, 0, -6356818, 196609, 1, -6225747, 65537, 1, -5963610, 262145, 0, -5963611, 262145, 0, -5963612, 65537, 1, -7012154, 131073, 2, -7012153, 393217, 1, -7012152, 196609, 2, -7012151, 196609, 0, -7012148, 196609, 2, -7012145, 262145, 1, -7012140, 65537, 0, -7012138, 327681, 2, -7012135, 262145, 2, -7012131, 196609, 2, -7012127, 131073, 0, -7012120, 327681, 2, -7012114, 327681, 0, -7012113, 65537, 1, -7012111, 196609, 1, -7012105, 196609, 2, -7012104, 65537, 1)
 
-[node name="Nightborne" parent="." instance=ExtResource("14_vfp1r")]
-position = Vector2(3452, -1930)
+[node name="RichTextLabel3" type="RichTextLabel" parent="."]
+modulate = Color(0.6, 0.607843, 0.678431, 1)
+z_index = 50
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 332.0
+offset_top = -293.0
+offset_right = 589.0
+offset_bottom = -223.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("15_qntln")
+theme_override_font_sizes/normal_font_size = 22
+text = "Left Click to attack 
 
-[node name="Nightborne2" parent="." instance=ExtResource("14_vfp1r")]
-position = Vector2(4527, -2372)
+"
+scroll_active = false
+visible_characters_behavior = 1
 
-[node name="Nightborne3" parent="." instance=ExtResource("14_vfp1r")]
-position = Vector2(4046, -2383)
+[node name="RichTextLabel6" type="RichTextLabel" parent="."]
+modulate = Color(0.6, 0.607843, 0.678431, 1)
+z_index = 50
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -525.0
+offset_top = -37.0
+offset_right = 3.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("15_qntln")
+theme_override_font_sizes/normal_font_size = 22
+text = "Press \"A\" & \"D\" to walk				Press \"Shift\" to dash
+& \"W\" or \"Space\" to jump
 
-[node name="Nightborne4" parent="." instance=ExtResource("14_vfp1r")]
-position = Vector2(4588, -2817)
+"
+scroll_active = false
+visible_characters_behavior = 1
 
-[node name="Nightborne5" parent="." instance=ExtResource("14_vfp1r")]
-position = Vector2(4175, -2824)
+[node name="RichTextLabel4" type="RichTextLabel" parent="."]
+modulate = Color(0.6, 0.607843, 0.678431, 1)
+z_index = 50
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 1524.0
+offset_top = -351.0
+offset_right = 1882.0
+offset_bottom = -281.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("15_qntln")
+theme_override_font_sizes/normal_font_size = 22
+text = "Right Click on an enemy  to Cast Spell
+^ requires enough rage 
+"
+scroll_active = false
+visible_characters_behavior = 1
 
-[node name="Slime" parent="." instance=ExtResource("9_6qwxv")]
-position = Vector2(5788, -3232)
+[node name="RichTextLabel7" type="RichTextLabel" parent="."]
+modulate = Color(0.6, 0.607843, 0.678431, 1)
+z_index = 50
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 2564.0
+offset_top = -639.0
+offset_right = 2922.0
+offset_bottom = -569.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("15_qntln")
+theme_override_font_sizes/normal_font_size = 22
+text = "Defeat the King!
+"
+scroll_active = false
+visible_characters_behavior = 1
 
-[node name="Nightborne6" parent="." instance=ExtResource("14_vfp1r")]
-position = Vector2(6624, -3565)
-leftlimitX = 6695
-rightLimitX = 7500
-
-[node name="Nightborne7" parent="." instance=ExtResource("14_vfp1r")]
-position = Vector2(6468, -3489)
-leftlimitX = 6695
-rightLimitX = 7500
-
-[node name="Nightborne8" parent="." instance=ExtResource("14_vfp1r")]
-position = Vector2(6880, -3497)
-leftlimitX = 6695
-rightLimitX = 7500
-
-[node name="Nightborne9" parent="." instance=ExtResource("14_vfp1r")]
-position = Vector2(7107, -3494)
-leftlimitX = 6695
-rightLimitX = 7500
+[node name="RichTextLabel5" type="RichTextLabel" parent="."]
+modulate = Color(0.6, 0.607843, 0.678431, 1)
+z_index = 50
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 974.0
+offset_top = -483.0
+offset_right = 1288.0
+offset_bottom = -413.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("15_qntln")
+theme_override_font_sizes/normal_font_size = 22
+text = "Gain RAGE by attacking, getting hit, and close ly avoiding attacks
+"
+scroll_active = false
+visible_characters_behavior = 1
