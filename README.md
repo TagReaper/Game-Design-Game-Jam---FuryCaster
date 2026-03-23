@@ -2,6 +2,8 @@
 
 This project is for CSE-4453, Game Jam Project
 
+Itch.io link: https://tagreaper.itch.io/fury-caster 
+
 ## Contributors & Role:
 * Lucas Cox (lrc331) [TagReaper]            |  Sole Developer & Designer
 
