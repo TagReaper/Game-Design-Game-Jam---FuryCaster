@@ -2,11 +2,12 @@ extends Control
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	$AudioStreamPlayer.volume_db = -80 + Global.MUSIC_Volume * (-15+80)
 
 
 func _on_start_pressed():
-	SceneLoader.load_scene("res://Scenes/Level.tscn")
+	SceneLoader.load_scene("res://Scenes/Transition.tscn")
 
 
 func _on_options_pressed():

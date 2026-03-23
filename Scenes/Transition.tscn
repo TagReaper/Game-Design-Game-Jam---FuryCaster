@@ -1,0 +1,386 @@
+[gd_scene load_steps=12 format=3 uid="uid://6qvxtvslbfgx"]
+
+[ext_resource type="Texture2D" uid="uid://cpkghdshpwoov" path="res://Environment/Paralax BG/platformer_background/sky_layer_0-modified.png" id="1_8b3j4"]
+[ext_resource type="Texture2D" uid="uid://bho8mna2vyjqe" path="res://Environment/Paralax BG/platformer_background/sky_layer_1.png" id="2_vggc7"]
+[ext_resource type="Texture2D" uid="uid://dgpda8opjh6yh" path="res://Environment/Paralax BG/platformer_background/sky_layer_2.png" id="3_kgoyb"]
+[ext_resource type="Texture2D" uid="uid://db3411y52nudw" path="res://Environment/Paralax BG/platformer_background/sky_layer_3-modified.png" id="4_36gjl"]
+[ext_resource type="Texture2D" uid="uid://o5qlt4s8kpf0" path="res://Environment/Paralax BG/platformer_background/light_ray_L.png" id="5_y5y5h"]
+[ext_resource type="Script" path="res://Scenes/Camera2D.gd" id="6_h8vyb"]
+[ext_resource type="FontFile" uid="uid://dmrqcor2emhro" path="res://UI/GrapeSoda.ttf" id="7_fy4q0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4eh8j"]
+bg_color = Color(0.0313726, 0, 0, 1)
+corner_radius_top_left = 48
+corner_radius_top_right = 48
+corner_radius_bottom_right = 48
+corner_radius_bottom_left = 48
+
+[sub_resource type="Animation" id="Animation_mrq6o"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RichTextLabel:visible_characters")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RichTextLabel:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RichTextLabel:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("RichTextLabel2:visible_characters")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("RichTextLabel2:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("RichTextLabel2:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_qe0j4"]
+resource_name = "Transition"
+length = 39.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RichTextLabel:visible_characters")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.5, 3, 5.5, 6, 8.5, 9, 18.5, 19, 20.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0, 53, 53, 95, 95, 132, 132, 416, 416, 425]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RichTextLabel:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 22),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RichTextLabel:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(20.5, 22),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("RichTextLabel2:visible_characters")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(22, 23.5, 24, 32, 32.5, 35.5, 36, 37.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0, 21, 21, 297, 297, 341, 341, 391]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("RichTextLabel2:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 22),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("RichTextLabel2:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(37.5, 39),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7cepa"]
+_data = {
+"RESET": SubResource("Animation_mrq6o"),
+"Transition": SubResource("Animation_qe0j4")
+}
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(0.517647, 0.54902, 0.658824, 1)
+texture_filter = 1
+position = Vector2(240, 120)
+motion_scale = Vector2(0, 0)
+motion_mirroring = Vector2(960, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture = ExtResource("1_8b3j4")
+
+[node name="Sprite2D2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(480, 0)
+texture = ExtResource("1_8b3j4")
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(0.517647, 0.54902, 0.658824, 1)
+texture_filter = 1
+position = Vector2(240, 140)
+motion_scale = Vector2(0.1, 0)
+motion_mirroring = Vector2(960, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+texture = ExtResource("2_vggc7")
+
+[node name="Sprite2D2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2(480, 0)
+texture = ExtResource("2_vggc7")
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(0.517647, 0.54902, 0.658824, 1)
+texture_filter = 1
+position = Vector2(240, 140)
+motion_scale = Vector2(0.15, 0)
+motion_mirroring = Vector2(960, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
+texture = ExtResource("3_kgoyb")
+
+[node name="Sprite2D2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
+position = Vector2(480, 0)
+texture = ExtResource("3_kgoyb")
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(0.517647, 0.54902, 0.658824, 1)
+texture_filter = 1
+position = Vector2(240, 140)
+motion_scale = Vector2(0.3, 0)
+motion_mirroring = Vector2(960, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4"]
+texture = ExtResource("4_36gjl")
+
+[node name="Sprite2D2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4"]
+position = Vector2(480, 0)
+texture = ExtResource("4_36gjl")
+
+[node name="ParallaxLayer5" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(0.517647, 0.54902, 0.658824, 1)
+texture_filter = 1
+position = Vector2(240, 131)
+scale = Vector2(1, 1.1)
+motion_scale = Vector2(0.25, 0)
+motion_mirroring = Vector2(800, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer5"]
+texture = ExtResource("5_y5y5h")
+
+[node name="ParallaxLayer6" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(0.517647, 0.54902, 0.658824, 1)
+texture_filter = 1
+position = Vector2(240, 131)
+scale = Vector2(1, 1.1)
+motion_scale = Vector2(0.2, 0)
+motion_mirroring = Vector2(720, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer6"]
+position = Vector2(265, 0)
+texture = ExtResource("5_y5y5h")
+
+[node name="ParallaxLayer7" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(0.517647, 0.54902, 0.658824, 1)
+texture_filter = 1
+position = Vector2(240, 130)
+scale = Vector2(1, 1.1)
+motion_scale = Vector2(0.22, 0)
+motion_mirroring = Vector2(1200, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer7"]
+position = Vector2(136, 0)
+texture = ExtResource("5_y5y5h")
+
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("Text1", "Text2", "anim")]
+zoom = Vector2(2.5, 2.5)
+script = ExtResource("6_h8vyb")
+Text1 = NodePath("../CanvasLayer/RichTextLabel")
+Text2 = NodePath("../CanvasLayer/RichTextLabel2")
+anim = NodePath("../CanvasLayer/AnimationPlayer")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -355.5
+offset_top = -182.0
+offset_right = 355.5
+offset_bottom = 182.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4eh8j")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -339.0
+offset_top = -153.5
+offset_right = 339.0
+offset_bottom = 153.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("7_fy4q0")
+theme_override_font_sizes/normal_font_size = 22
+text = "The air trembles before the first spark ever forms.
+
+Magic was never meant to feel like this.
+
+Not calm. Not controlled. Not safe.
+
+You feel it clawing inside you—heat behind your ribs, a pressure in your veins, something ancient and furious begging to be released. Other sorcerers speak of focus and discipline… but they’ve never felt this. They’ve never stood on the edge of losing themselves just to gain power.
+
+You have."
+scroll_active = false
+autowrap_mode = 2
+visible_characters = 0
+visible_characters_behavior = 1
+visible_ratio = 0.0
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="CanvasLayer"]
+visible = false
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -339.0
+offset_top = -154.0
+offset_right = 339.0
+offset_bottom = 153.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("7_fy4q0")
+theme_override_font_sizes/normal_font_size = 22
+text = "And you will again.
+
+Every spell you cast feeds the fire. Every enemy you strike stokes it higher. Rage is no longer a weakness—it is your weapon, your fuel, your curse. The more you embrace it, the stronger you become… but the closer you drift to something far more dangerous than your enemies.
+
+Control is an illusion.
+
+Power is a choice.
+
+How far will you go before the rage consumes you?"
+scroll_active = false
+visible_characters = 0
+visible_characters_behavior = 1
+visible_ratio = 0.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
+libraries = {
+"": SubResource("AnimationLibrary_7cepa")
+}
+autoplay = "Transition"
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="CanvasLayer"]
+modulate = Color(0.466667, 0.466667, 0.466667, 1)
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.5
+offset_top = 155.0
+offset_right = 128.5
+offset_bottom = 182.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("7_fy4q0")
+theme_override_font_sizes/normal_font_size = 22
+text = "Hold Space to Fast Forward"
+scroll_active = false
+visible_characters_behavior = 1
+
+[connection signal="animation_finished" from="CanvasLayer/AnimationPlayer" to="Camera2D" method="_on_animation_player_animation_finished"]

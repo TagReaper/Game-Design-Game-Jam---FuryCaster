@@ -106,7 +106,8 @@ func _physics_process(delta):
 		currentState = State.WALK
 		velocity.x = direction * speed * speedMultiplier
 	elif (currentState != State.DASH):
-		currentState = State.IDLE
+		if currentState != State.DEAD:
+			currentState = State.IDLE
 		velocity.x = move_toward(velocity.x, 0, speed * speedMultiplier * friction)
 	else:
 		global_position.x = move_toward(global_position.x, dashPositionX, 5)
@@ -156,32 +157,37 @@ func _physics_process(delta):
 			spell.cast()
 			MagicCooldown.start()
 	
-	#Overflow Check
-	if (rage >= maxRage && currentState != State.DEAD):
-		if PlayerSprite.animation != "Overflow":
-			SFX.stream = overflowSFX
-			SFX.pitch_scale = randf_range(0.9, 1.1)
-			SFX.volume_db = -50 + Global.SFX_Volume * (2+50)
-			SFX.play()
-			OverflowTimer.start()
-			rageTimer.paused = true
-			health *= 0.5
-			$"UI+Options/UI/Healthbar"._health_bar_change()
-		currentState = State.OVERFLOW
-	else:
-		#Extra State Checks in order of priority
-		if (!is_on_floor() and canMove):
-			if(velocity.y < 0):
-				currentState = State.JUMP
-			else:
-				currentState = State.FALL
-	
+	#death check
 	if (health <= 0):
 		if PlayerSprite.animation != "Death":
 			SFX.stream = deathSFX
 			SFX.volume_db = -50 + Global.SFX_Volume * (-10+50)
 			SFX.play()
 			PlayerSprite.play("Death")
+			await get_tree().create_timer(5).timeout
+			SceneLoader.load_scene("res://Scenes/main_menu.tscn")
+		currentState = State.DEAD
+	
+	#Overflow Check
+	if (rage >= maxRage and currentState != State.DEAD and PlayerSprite.animation != "Death"):
+		if PlayerSprite.animation != "Overflow":
+			PlayerSprite.play("Overflow")
+			SFX.stream = overflowSFX
+			SFX.pitch_scale = randf_range(0.9, 1.1)
+			SFX.volume_db = -50 + Global.SFX_Volume * (2+50)
+			SFX.play()
+			OverflowTimer.start()
+			rageTimer.paused = true
+			health * 0.7
+			$"UI+Options/UI/Healthbar"._health_bar_change()
+		currentState = State.OVERFLOW
+	else:
+		#Extra State Checks in order of priority
+		if (!is_on_floor() and canMove and currentState != State.DEAD):
+			if(velocity.y < 0):
+				currentState = State.JUMP
+			else:
+				currentState = State.FALL
 	
 	match PlayerSprite.animation:
 		"Attack":
